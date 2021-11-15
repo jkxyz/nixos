@@ -85,6 +85,7 @@
     vim
     firefox
     _1password-gui
+    wl-clipboard
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
