@@ -6,11 +6,14 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
   };
 
-  outputs = { nixpkgs, ... }: {
+  outputs = { nixpkgs, nixos-hardware, ... }: {
     nixosConfigurations = {
       sparrowhawk = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/sparrowhawk ];
+        modules = [ 
+          ./hosts/sparrowhawk 
+          nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel 
+        ];
       };
     };
   };
