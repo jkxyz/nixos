@@ -76,15 +76,12 @@
   #   firefox
   # ];
 
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "1password"
-  ];
+  nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
     git
     vim
     firefox
-    _1password-gui
     wl-clipboard
   ];
 
