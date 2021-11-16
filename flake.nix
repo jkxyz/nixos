@@ -13,7 +13,7 @@
         modules = [ 
           nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel 
           ./modules/hosts/sparrowhawk 
-          ./modules/nix-unstable
+          ./modules/nix-unstable.nix
         ];
       };
     };
