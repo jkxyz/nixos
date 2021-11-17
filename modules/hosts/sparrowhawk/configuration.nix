@@ -5,10 +5,9 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -76,10 +75,7 @@
   #   firefox
   # ];
 
-  environment.systemPackages = with pkgs; [
-    git
-    vim
-  ];
+  environment.systemPackages = with pkgs; [ git vim ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -109,4 +105,3 @@
   system.stateVersion = "21.05"; # Did you read the comment?
 
 }
-

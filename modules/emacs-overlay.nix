@@ -1,7 +1,6 @@
-emacs-overlay: { ... }:
+emacs-overlay:
+{ ... }:
 
 {
-  nixpkgs.overlays = [
-    emacs-overlay.overlay
-  ];
+  nixpkgs.overlays = [ emacs-overlay.overlay ];
 }
