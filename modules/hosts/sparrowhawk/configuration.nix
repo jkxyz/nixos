@@ -76,13 +76,9 @@
   #   firefox
   # ];
 
-  nixpkgs.config.allowUnfree = true;
-
   environment.systemPackages = with pkgs; [
     git
     vim
-    firefox
-    wl-clipboard
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

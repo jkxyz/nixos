@@ -14,10 +14,11 @@
         system = "x86_64-linux";
         modules = [ 
           nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel 
-          ./modules/hosts/sparrowhawk 
+          ./modules/hosts/sparrowhawk.nix
           ./modules/nix-flakes.nix
           (import ./modules/home-manager.nix home-manager)
-          (import ./modules/emacs.nix emacs-overlay)
+          (import ./modules/emacs-overlay.nix emacs-overlay)
+          ./modules/home.nix
         ];
       };
     };
