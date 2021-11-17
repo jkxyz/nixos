@@ -2,12 +2,9 @@
 
 {
   home-manager.users.josh = { pkgs, ... }: {
-    imports = [ ./home/emacs.nix ];
+    imports = [ ./home/emacs.nix ./home/development.nix ];
 
-    programs.bash = {
-      enable = true;
-      sessionVariables = { PATH = "~/.emacs.d/bin:$PATH"; };
-    };
+    programs.bash.enable = true;
 
     programs.git = {
       enable = true;
