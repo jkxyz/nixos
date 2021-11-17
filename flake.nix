@@ -15,7 +15,7 @@
         modules = [ 
           nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel 
           ./modules/hosts/sparrowhawk 
-          ./modules/nix-unstable.nix
+          ./modules/nix-flakes.nix
           (import ./modules/home-manager.nix home-manager)
           (import ./modules/emacs.nix emacs-overlay)
         ];
