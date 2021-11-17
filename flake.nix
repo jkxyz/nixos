@@ -2,12 +2,13 @@
   description = "Nix systems configuration";
 
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs/nixos-21.05;
-    nixpkgs-unstable.url = github:nixos/nixpkgs/nixos-unstable;
+    nixpkgs.url = github:nixos/nixpkgs/nixos-unstable;
     nixos-hardware.url = github:nixos/nixos-hardware;
+    emacs-overlay.url = github:nix-community/emacs-overlay;
+    home-manager.url = github:nix-community/home-manager;
   };
 
-  outputs = { nixpkgs, nixpkgs-unstable, nixos-hardware, ... }: {
+  outputs = { self, nixpkgs, nixos-hardware, emacs-overlay, home-manager, ... }: {
     nixosConfigurations = {
       sparrowhawk = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -15,7 +16,8 @@
           nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel 
           ./modules/hosts/sparrowhawk 
           ./modules/nix-unstable.nix
-          (import ./modules/1password.nix nixpkgs-unstable)
+          (import ./modules/home-manager.nix home-manager)
+          (import ./modules/emacs.nix emacs-overlay)
         ];
       };
     };
