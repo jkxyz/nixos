@@ -2,7 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    git
     ripgrep
     fd
     emacs-all-the-icons-fonts
