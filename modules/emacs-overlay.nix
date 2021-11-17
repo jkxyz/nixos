@@ -1,6 +1,5 @@
-emacs-overlay:
-{ ... }:
+{ inputs, ... }:
 
 {
-  nixpkgs.overlays = [ emacs-overlay.overlay ];
+  nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
 }
