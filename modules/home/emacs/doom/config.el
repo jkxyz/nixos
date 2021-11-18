@@ -23,8 +23,14 @@
 
 (use-package! evil-cleverparens
   :hook (clojure-mode . evil-cleverparens-mode)
-  :hook (emacs-lisp-mode . evil-cleverparens-mode))
+  :hook (emacs-lisp-mode . evil-cleverparens-mode)
+  ;; Always enable smartparens-strict-mode
+  :hook (evil-cleverparens-mode . smartparens-strict-mode))
 
 (load-file (concat (file-name-directory load-file-name) "/org.el"))
 
 (setq rmh-elfeed-org-files (list (concat org-directory "Feeds.org")))
+
+(use-package! lsp-ui
+  :custom
+  (lsp-ui-sideline-show-code-actions nil))
