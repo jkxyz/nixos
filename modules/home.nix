@@ -2,7 +2,7 @@
 
 {
   home-manager.users.josh = { pkgs, ... }: {
-    imports = [ ./home/emacs.nix ./home/development.nix ];
+    imports = [ ./home/emacs.nix ./home/development.nix ./home/syncthing.nix ];
 
     programs.bash.enable = true;
 

@@ -16,7 +16,5 @@
     extraPackages = epkgs: [ epkgs.vterm ];
   };
 
-  services.syncthing.enable = true;
-
   home.file.".doom.d".source = ./emacs/doom;
 }
