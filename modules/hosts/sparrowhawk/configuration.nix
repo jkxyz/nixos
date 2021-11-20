@@ -38,6 +38,7 @@
       swaylock
       swayidle
       wl-clipboard
+      brightnessctl
     ];
     extraSessionCommands = ''
       export MOZ_ENABLE_WAYLAND=1
@@ -60,7 +61,15 @@
     extraGroups = [ "wheel" "networkmanager" ];
   };
 
-  environment.systemPackages = with pkgs; [ git vim ];
+  environment.systemPackages = with pkgs; [ git vim pavucontrol ];
+
+  hardware.bluetooth.enable = true;
+
+  hardware.bluetooth.settings = {
+    General = { Enable = "Source,Sink,Media,Socket"; };
+  };
+
+  services.blueman.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
