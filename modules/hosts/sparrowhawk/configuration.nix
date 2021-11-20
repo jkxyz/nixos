@@ -15,6 +15,7 @@
   networking.useDHCP = false;
   networking.interfaces.enp4s0.useDHCP = true;
   networking.interfaces.wlp0s20f3.useDHCP = true;
+  networking.wireless.enable = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -23,16 +24,25 @@
 
   # Enable GDM and GNOME
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Disable caps lock within GNOME
-  services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
-    [org.gnome.desktop.input-sources]
-    xkb-options = ['ctrl:nocaps']
-  '';
 
   # Configure keymap in X11
   services.xserver.layout = "us";
+
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+    extraPackages = with pkgs; [
+      alacritty
+      dmenu
+      mako
+      swaylock
+      swayidle
+      wl-clipboard
+    ];
+    extraSessionCommands = ''
+      export MOZ_ENABLE_WAYLAND=1
+    '';
+  };
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -43,6 +53,7 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
+  services.xserver.libinput.touchpad.naturalScrolling = true;
 
   users.users.josh = {
     isNormalUser = true;

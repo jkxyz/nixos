@@ -10,9 +10,19 @@
     ];
 
   home-manager.users.josh = { pkgs, ... }: {
-    imports = [ ./home/emacs.nix ./home/development.nix ./home/syncthing.nix ];
+    imports = [
+      ./home/sway.nix
+      ./home/emacs.nix
+      ./home/development.nix
+      ./home/syncthing.nix
+    ];
 
-    home.packages = with pkgs; [ slack _1password-gui spotify ungoogled-chromium ];
+    home.packages = with pkgs; [
+      slack
+      _1password-gui
+      spotify
+      ungoogled-chromium
+    ];
 
     programs.bash.enable = true;
 
