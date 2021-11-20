@@ -7,6 +7,7 @@
     emacs-all-the-icons-fonts
     nixfmt
     editorconfig-core-c
+    fira-code
   ];
 
   home.sessionPath = [ "~/.emacs.d/bin" ];
