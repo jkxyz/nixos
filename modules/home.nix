@@ -14,6 +14,7 @@
       ./home/sway.nix
       ./home/emacs.nix
       ./home/development.nix
+      ./home/clojure.nix
       ./home/syncthing.nix
     ];
 

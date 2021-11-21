@@ -1,0 +1,1 @@
+{:deps {cider/cider-nrepl {:mvn/version "0.27.2"}}}
