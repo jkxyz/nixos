@@ -18,12 +18,12 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $menu wofi --show run
 
 ### Output configuration
 #
 # Default wallpaper
-#output * bg ~/.config/sway/backgrounds/Sway_Wallpaper_Blue_1920x1080.png fill
+# output * bg ~/.config/sway/backgrounds/Sway_Wallpaper_Blue_1920x1080.png fill
 #
 # Example configuration:
 #
@@ -47,10 +47,11 @@ output HDMI-A-1 resolution 2560x1440 position 0,0
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
-# exec swayidle -w \
-#     timeout 300 'swaylock -f -c 000000' \
-#     timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-#     before-sleep 'swaylock -f -c 000000'
+# TODO Learn about logind/loginctl and sleep
+exec swayidle -w \
+    timeout 300 'swaylock -f -c 000000' \
+    timeout 600 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"'
 
 ### Input configuration
 #

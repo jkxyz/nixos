@@ -33,7 +33,7 @@
     wrapperFeatures.gtk = true;
     extraPackages = with pkgs; [
       alacritty
-      dmenu
+      wofi
       mako
       swaylock
       swayidle
