@@ -1,5 +1,8 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+;; TODO Find a way to make this more portable
+(setq custom-file "~/Code/configuration/modules/home/emacs/doom/custom.el")
+
 (setq user-full-name "Josh Kingsley"
       user-mail-address "josh@joshkingsley.me")
 
