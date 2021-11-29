@@ -58,10 +58,10 @@
 
   users.users.josh = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" ];
   };
 
-  environment.systemPackages = with pkgs; [ git vim pavucontrol ];
+  environment.systemPackages = with pkgs; [ git vim ];
 
   hardware.bluetooth.enable = true;
 

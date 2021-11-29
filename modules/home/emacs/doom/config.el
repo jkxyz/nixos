@@ -15,7 +15,7 @@
 (setq display-line-numbers-type t)
 
 ;; Tell projectile where to find projects
-(setq projectile-project-search-path '("~/Code/" "~/Code/nosco/"))
+(setq projectile-project-search-path '("~/Code/" "~/Code/Nosco/"))
 
 (defun jk/switch-project-action (dir)
   "Run `magit-status' after switching to a new project."
