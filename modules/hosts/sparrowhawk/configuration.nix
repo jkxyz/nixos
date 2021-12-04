@@ -15,7 +15,7 @@
   networking.useDHCP = false;
   networking.interfaces.enp4s0.useDHCP = true;
   networking.interfaces.wlp0s20f3.useDHCP = true;
-  networking.wireless.enable = true;
+  # networking.wireless.enable = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -24,6 +24,24 @@
 
   # Enable GDM and GNOME
   services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.debug = true;
+
+  services.xserver.desktopManager.gnome = {
+    enable = true;
+    debug = true;
+
+    extraGSettingsOverrides = ''
+      [org.gnome.desktop.input-sources]
+      xkb-options=['ctrl:nocaps']
+
+      [org.gnome.mutter]
+      experimental-features=['scale-monitor-framebuffer']
+    '';
+
+    extraGSettingsOverridePackages = [ pkgs.gnome.mutter pkgs.gsettings-desktop-schemas ];
+  };
+
+  services.pipewire.enable = true;
 
   # Configure keymap in X11
   services.xserver.layout = "us";
@@ -58,10 +76,10 @@
 
   users.users.josh = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "networkmanager" ];
   };
 
-  environment.systemPackages = with pkgs; [ git vim ];
+  environment.systemPackages = with pkgs; [ git vim pavucontrol ];
 
   hardware.bluetooth.enable = true;
 
