@@ -36,6 +36,8 @@ exec mako
 output eDP-1 resolution 1920x1080 scale 1.25 position 0,1440
 output HDMI-A-1 resolution 2560x1440 position 0,0
 
+output * background ~/.config/sway/backgrounds/Transfagarasan.jpg fill
+
 ### Idle configuration
 #
 # Example configuration:
@@ -237,13 +239,13 @@ bar {
     position top
 
     # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
+    # TODO Write this to use the swaybar protocol
     status_command jk-sway-status
 
     colors {
         statusline #ffffff
         background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
+        inactive_workspace #323232 #323232 #5c5c5c
     }
 }
 

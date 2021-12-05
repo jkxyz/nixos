@@ -61,6 +61,7 @@
       pamixer
       acpi
       sysstat
+      swaybg
 
       (pkgs.writers.writeBashBin "jk-sway-status" ''
         system_out=$(mktemp)
