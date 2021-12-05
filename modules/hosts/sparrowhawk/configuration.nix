@@ -36,7 +36,8 @@
       experimental-features=['scale-monitor-framebuffer']
     '';
 
-    extraGSettingsOverridePackages = [ pkgs.gnome.mutter pkgs.gsettings-desktop-schemas ];
+    extraGSettingsOverridePackages =
+      [ pkgs.gnome.mutter pkgs.gsettings-desktop-schemas ];
   };
 
   services.pipewire.enable = true;
@@ -58,6 +59,32 @@
       brightnessctl
       wob
       pamixer
+      acpi
+      sysstat
+
+      (pkgs.writers.writeBashBin "jk-sway-status" ''
+        system_out=$(mktemp)
+
+        # vmstat takes 1 second to sample CPU usage, so run it in the background
+        while true; do
+          echo $(vmstat --unit M 1 2 | tail -1 | awk '{ print "CPU: " (100-$15) "% | Mem: " $4 " free" }') > $system_out
+        done &
+
+        while true; do
+          date=$(date +'%a %d %b %H:%M')
+          battery=$(acpi --battery)
+          disk=$(df | awk '{ if ($6 == "/") { print "Disk: " $5 } }')
+          system=$(cat $system_out)
+
+          if [ -n "$system" ]; then
+            echo -n "$system | "
+          fi
+
+          echo "$disk | $battery | $date"
+
+          sleep 1
+        done
+      '')
     ];
     extraSessionCommands = ''
       export MOZ_ENABLE_WAYLAND=1
