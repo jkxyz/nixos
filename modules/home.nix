@@ -43,5 +43,11 @@
     home.sessionVariables = {
       MOZ_ENABLE_WAYLAND = "1";
     };
+
+    services.gammastep = {
+      enable = true;
+      latitude = 47.046501;
+      longitude = 21.918944;
+    };
   };
 }

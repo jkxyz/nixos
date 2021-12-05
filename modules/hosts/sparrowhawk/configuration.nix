@@ -24,11 +24,9 @@
 
   # Enable GDM and GNOME
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.debug = true;
 
   services.xserver.desktopManager.gnome = {
     enable = true;
-    debug = true;
 
     extraGSettingsOverrides = ''
       [org.gnome.desktop.input-sources]
@@ -42,6 +40,7 @@
   };
 
   services.pipewire.enable = true;
+  xdg.portal.wlr.enable = true;
 
   # Configure keymap in X11
   services.xserver.layout = "us";
@@ -57,6 +56,8 @@
       swayidle
       wl-clipboard
       brightnessctl
+      wob
+      pamixer
     ];
     extraSessionCommands = ''
       export MOZ_ENABLE_WAYLAND=1

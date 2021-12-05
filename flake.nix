@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-21.11";
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    emacs-overlay.url = "github:nix-community/emacs-overlay?rev=80db8e4e9f25e81662a244a96029f3427fe3d5b9";
     home-manager.url = "github:nix-community/home-manager";
   };
 
@@ -18,8 +18,7 @@
           ./modules/hosts/sparrowhawk.nix
           ./modules/nix-flakes.nix
           ./modules/home-manager.nix
-          # Not using latest Emacs yet due to issue in Doom
-          # ./modules/emacs-overlay.nix
+          ./modules/emacs-overlay.nix
           ./modules/home.nix
         ];
       };
