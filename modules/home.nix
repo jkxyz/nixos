@@ -9,45 +9,56 @@
       "spotify-unwrapped"
     ];
 
-  home-manager.users.josh = { pkgs, ... }: {
-    imports = [
-      ./home/sway.nix
-      ./home/emacs.nix
-      ./home/development.nix
-      ./home/clojure.nix
-      ./home/syncthing.nix
-    ];
+  home-manager.users.josh = { pkgs, ... }:
 
-    home.packages = with pkgs; [
-      slack
-      _1password-gui
-      spotify
-      ungoogled-chromium
-      gnome.polari
-    ];
+    let
+      slack-wayland = (pkgs.writers.writeBashBin "slack-wayland" ''
+        ${pkgs.slack}/bin/slack --enable-features=UseOzonePlatform --ozone-platform=wayland
+      '');
+      chromium-wayland = (pkgs.writers.writeBashBin "chromium-wayland" ''
+        ${pkgs.ungoogled-chromium}/bin/chromium --enable-features=UseOzonePlatform --ozone-platform=wayland
+      '');
 
-    programs.bash.enable = true;
+    in {
+      imports = [
+        ./home/sway.nix
+        ./home/emacs.nix
+        ./home/development.nix
+        ./home/clojure.nix
+        ./home/syncthing.nix
+      ];
 
-    programs.git = {
-      enable = true;
-      userName = "Josh Kingsley";
-      userEmail = "josh@joshkingsley.me";
-      ignores = [ ".direnv" ];
+      home.packages = with pkgs; [
+        slack
+        slack-wayland
+        _1password-gui
+        spotify
+        ungoogled-chromium
+        chromium-wayland
+        gnome.polari
+        calibre
+      ];
+
+      programs.bash.enable = true;
+
+      programs.git = {
+        enable = true;
+        userName = "Josh Kingsley";
+        userEmail = "josh@joshkingsley.me";
+        ignores = [ ".direnv" ];
+      };
+
+      programs.firefox.enable = true;
+
+      programs.direnv.enable = true;
+      programs.direnv.nix-direnv.enable = true;
+
+      home.sessionVariables = { MOZ_ENABLE_WAYLAND = "1"; };
+
+      services.gammastep = {
+        enable = true;
+        latitude = 47.046501;
+        longitude = 21.918944;
+      };
     };
-
-    programs.firefox.enable = true;
-
-    programs.direnv.enable = true;
-    programs.direnv.nix-direnv.enable = true;
-
-    home.sessionVariables = {
-      MOZ_ENABLE_WAYLAND = "1";
-    };
-
-    services.gammastep = {
-      enable = true;
-      latitude = 47.046501;
-      longitude = 21.918944;
-    };
-  };
 }
