@@ -1,6 +1,10 @@
 { config, pkgs, lib, ... }:
 
-{
+let
+  writeBabashka =
+    pkgs.writers.makeScriptWriter { interpreter = "${pkgs.babashka}/bin/bb"; };
+
+in {
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -62,6 +66,7 @@
       acpi
       sysstat
       swaybg
+      jc
 
       (pkgs.writers.writeBashBin "jk-sway-status" ''
         system_out=$(mktemp)
@@ -86,6 +91,8 @@
           sleep 1
         done
       '')
+
+      (writeBabashka "/bin/jk-sway-status2" ./jk_sway_status.clj)
     ];
     extraSessionCommands = ''
       export MOZ_ENABLE_WAYLAND=1
