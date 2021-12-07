@@ -1,7 +1,8 @@
 (require
  '[clojure.string :as string]
  '[clojure.java.shell :as shell]
- '[cheshire.core :as json])
+ '[cheshire.core :as json]
+ '[babashka.process :as process])
 
 (def header {:version 1})
 
@@ -9,6 +10,7 @@
 
 (println "[")
 
+#_
 (-> (Runtime/getRuntime)
     (.addShutdownHook (Thread. #(println "]"))))
 
@@ -30,7 +32,13 @@
       (<= percentage 25)
       (assoc :urgent true))))
 
+(defn wifi []
+  (when-let [name (not-empty (string/trim (:out (process/sh ["nmcli" "-t" "-f" "NAME" "connection" "show" "--active"]))))]
+    {:full_text (str "Network: " name)}))
+
+(defn status-blocks []
+  (filter identity [(wifi) (battery) (clock)]))
+
 (while true
-  (let [status [(battery) (clock)]]
-    (println (str (json/generate-string status) ",")))
+  (println (str (json/generate-string (status-blocks)) ","))
   (Thread/sleep 1000))

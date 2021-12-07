@@ -21,6 +21,8 @@ in {
   networking.interfaces.wlp0s20f3.useDHCP = true;
   # networking.wireless.enable = true;
 
+  networking.networkmanager.enable = true;
+
   i18n.defaultLocale = "en_US.UTF-8";
 
   # Enable the X11 windowing system.
