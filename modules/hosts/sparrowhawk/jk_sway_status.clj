@@ -1,4 +1,5 @@
 (require
+ '[clojure.core.async :as async]
  '[clojure.string :as string]
  '[clojure.java.shell :as shell]
  '[cheshire.core :as json]
@@ -10,15 +11,17 @@
 
 (println "[")
 
-#_
 (-> (Runtime/getRuntime)
-    (.addShutdownHook (Thread. #(println "]"))))
+    (.addShutdownHook (Thread. #(println "\n]"))))
 
 (def date-time-formatter
   (java.time.format.DateTimeFormatter/ofPattern "EEE dd MMM HH:mm"))
 
-(defn jc [parser & cmd]
-  (-> (:out (shell/sh "jc" (str "--" (name parser)) :in (:out (apply shell/sh cmd))))
+(defn jc [parser cmd]
+  (-> (process/process cmd)
+      (process/process ["jc" (str "--" (name parser))])
+      :out
+      (slurp)
       (json/parse-string true)))
 
 (defn clock []
@@ -26,7 +29,7 @@
     {:full_text (.format now date-time-formatter)}))
 
 (defn battery []
-  (let [info (first (jc :upower "upower" "--show-info" "/org/freedesktop/UPower/devices/battery_BAT0"))
+  (let [info (first (jc :upower ["upower" "--show-info" "/org/freedesktop/UPower/devices/battery_BAT0"]))
         percentage (get-in info [:detail :percentage])]
     (cond-> {:full_text (str "Battery: " (Math/round percentage) "%")}
       (<= percentage 25)
@@ -37,9 +40,31 @@
     (when-let [name (not-empty (string/trim (:out (process/sh ["nmcli" "-t" "-f" "NAME" "connection" "show" "--active"]))))]
       {:full_text (str "Network: " name)})))
 
-(defn status-blocks []
-  (filter identity [(wifi) (battery) (clock)]))
+(def system-stats (atom nil))
 
-(while true
-  (println (str (json/generate-string (status-blocks)) ","))
-  (Thread/sleep 1000))
+(async/go-loop []
+  (let [vmstat (last (jc :vmstat ["vmstat" "--unit" "M" "1" "2"]))]
+    (reset! system-stats
+            {:cpu-usage (- 100 (:idle_time vmstat))
+             :free-mem (:free_mem vmstat)}))
+  (async/<! (async/timeout 1000))
+  (recur))
+
+(defn cpu []
+  (when-let [usage (:cpu-usage @system-stats)]
+    {:full_text (str "CPU: " usage "%")}))
+
+(defn memory []
+  (when-let [free (:free-mem @system-stats)]
+    {:full_text (str "Memory: " free "M free")}))
+
+(defn status-blocks []
+  (filter some? [(cpu) (memory) (wifi) (battery) (clock)]))
+
+(print (json/generate-string (status-blocks)))
+
+(loop []
+  (println ",")
+  (print (json/generate-string (status-blocks)))
+  (Thread/sleep 1000)
+  (recur))

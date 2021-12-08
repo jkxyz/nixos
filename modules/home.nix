@@ -37,6 +37,7 @@
         chromium-wayland
         gnome.polari
         calibre
+        robo3t
       ];
 
       programs.bash.enable = true;
