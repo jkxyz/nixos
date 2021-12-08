@@ -11,7 +11,7 @@ in {
 
   networking.hostName = "sparrowhawk";
 
-  time.timeZone = "Europe/Bucharest";
+  time.timeZone = "Europe/Copenhagen";
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -69,6 +69,7 @@ in {
       sysstat
       swaybg
       jc
+      networkmanager_dmenu
 
       (pkgs.writers.writeBashBin "jk-sway-status" ''
         system_out=$(mktemp)

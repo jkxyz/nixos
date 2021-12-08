@@ -33,8 +33,9 @@
       (assoc :urgent true))))
 
 (defn wifi []
-  (when-let [name (not-empty (string/trim (:out (process/sh ["nmcli" "-t" "-f" "NAME" "connection" "show" "--active"]))))]
-    {:full_text (str "Network: " name)}))
+  (when (= "activated" (string/trim (:out (process/sh ["nmcli" "-t" "-f" "STATE" "connection" "show" "--active"]))))
+    (when-let [name (not-empty (string/trim (:out (process/sh ["nmcli" "-t" "-f" "NAME" "connection" "show" "--active"]))))]
+      {:full_text (str "Network: " name)})))
 
 (defn status-blocks []
   (filter identity [(wifi) (battery) (clock)]))
