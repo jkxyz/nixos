@@ -253,4 +253,6 @@ bar {
     }
 }
 
+exec_always swaywsr
+
 include /etc/sway/config.d/*

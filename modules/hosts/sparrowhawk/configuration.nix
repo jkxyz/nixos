@@ -11,7 +11,7 @@ in {
 
   networking.hostName = "sparrowhawk";
 
-  time.timeZone = "Europe/Copenhagen";
+  time.timeZone = "Europe/London";
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -71,6 +71,7 @@ in {
       jc
       networkmanager_dmenu
       (writeBabashka "/bin/jk-sway-status" ./jk_sway_status.clj)
+      swaywsr
     ];
     extraSessionCommands = ''
       export MOZ_ENABLE_WAYLAND=1
