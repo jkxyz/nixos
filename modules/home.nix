@@ -38,6 +38,7 @@
         gnome.polari
         calibre
         robo3t
+        ledger
       ];
 
       programs.bash.enable = true;
