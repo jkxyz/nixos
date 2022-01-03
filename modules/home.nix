@@ -39,6 +39,7 @@
         calibre
         robo3t
         ledger
+        unstable.firefox
       ];
 
       programs.bash.enable = true;
@@ -49,8 +50,6 @@
         userEmail = "josh@joshkingsley.me";
         ignores = [ ".direnv" ];
       };
-
-      programs.firefox.enable = true;
 
       programs.direnv.enable = true;
       programs.direnv.nix-direnv.enable = true;
