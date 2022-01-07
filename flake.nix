@@ -21,7 +21,10 @@
           ({ ... }: {
             nixpkgs.overlays = [
               (final: prev: {
-                unstable = nixpkgs-unstable.legacyPackages.${prev.system};
+                unstable = import nixpkgs-unstable {
+                  system = prev.system;
+                  config.allowUnfree = true;
+                };
               })
             ];
           })

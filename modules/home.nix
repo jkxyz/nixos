@@ -13,10 +13,10 @@
 
     let
       slack-wayland = pkgs.writers.writeBashBin "slack-wayland" ''
-        ${pkgs.slack}/bin/slack --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland
+        exec ${pkgs.unstable.slack}/bin/slack --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland
       '';
       chromium-wayland = pkgs.writers.writeBashBin "chromium-wayland" ''
-        ${pkgs.ungoogled-chromium}/bin/chromium --enable-features=UseOzonePlatform --ozone-platform=wayland
+        exec ${pkgs.unstable.ungoogled-chromium}/bin/chromium --enable-features=UseOzonePlatform --ozone-platform=wayland
       '';
 
     in {
