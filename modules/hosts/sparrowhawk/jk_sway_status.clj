@@ -35,10 +35,21 @@
       (<= percentage 25)
       (assoc :urgent true))))
 
+(defn non-blank [s]
+  (when-not (string/blank? s)
+    s))
+
+(def wifi-device "wlp0s20f3")
+
+(defn get-wifi-connection []
+  (-> (:out (process/sh ["nmcli" "--terse" "--fields" "GENERAL.CONNECTION" "device" "show" wifi-device]))
+      (string/trim)
+      (subs (count "GENERAL.CONNECTION:"))
+      (non-blank)))
+
 (defn wifi []
-  (when (= "activated" (string/trim (:out (process/sh ["nmcli" "-t" "-f" "STATE" "connection" "show" "--active"]))))
-    (when-let [name (not-empty (string/trim (:out (process/sh ["nmcli" "-t" "-f" "NAME" "connection" "show" "--active"]))))]
-      {:full_text (str "Network: " name)})))
+  (when-let [connection (get-wifi-connection)]
+    {:full_text (str "WiFi: " connection)}))
 
 (def system-stats (atom nil))
 
