@@ -33,26 +33,28 @@ in {
   # Enable GDM and GNOME
   services.xserver.displayManager.gdm.enable = true;
 
-  services.xserver.desktopManager.gnome = {
-    enable = true;
+  # services.xserver.desktopManager.gnome = {
+  #   enable = true;
 
-    extraGSettingsOverrides = ''
-      [org.gnome.desktop.input-sources]
-      xkb-options=['ctrl:nocaps']
+  #   extraGSettingsOverrides = ''
+  #     [org.gnome.desktop.input-sources]
+  #     xkb-options=['ctrl:nocaps']
 
-      [org.gnome.mutter]
-      experimental-features=['scale-monitor-framebuffer']
-    '';
+  #     [org.gnome.mutter]
+  #     experimental-features=['scale-monitor-framebuffer']
+  #   '';
 
-    extraGSettingsOverridePackages =
-      [ pkgs.gnome.mutter pkgs.gsettings-desktop-schemas ];
-  };
+  #   extraGSettingsOverridePackages =
+  #     [ pkgs.gnome.mutter pkgs.gsettings-desktop-schemas ];
+  # };
 
   services.pipewire.enable = true;
   xdg.portal.wlr.enable = true;
 
   # Configure keymap in X11
   services.xserver.layout = "us";
+
+  services.upower.enable = true;
 
   programs.sway = {
     enable = true;
@@ -96,7 +98,7 @@ in {
     extraGroups = [ "wheel" "networkmanager" "docker" ];
   };
 
-  environment.systemPackages = with pkgs; [ git vim pavucontrol ];
+  environment.systemPackages = with pkgs; [ git vim pavucontrol unzip ];
 
   hardware.bluetooth.enable = true;
 
