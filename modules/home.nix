@@ -40,6 +40,7 @@
         robo3t
         ledger
         unstable.firefox
+        unstable.thunderbird
       ];
 
       programs.bash.enable = true;
