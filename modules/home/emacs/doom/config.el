@@ -39,3 +39,5 @@
 (use-package! lsp-ui
   :custom
   (lsp-ui-sideline-show-code-actions nil))
+
+(setq cljr-suppress-middleware-warnings t)
