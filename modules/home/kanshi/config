@@ -1,0 +1,9 @@
+profile {
+  # Set laptop display to scale 1 to fix Firefox/GTK popups issue with multiple monitors
+  output eDP-1 mode 1920x1080 position 0,0
+  output "Dell Inc. DELL U2715H GH85D51Q0CEL" mode 2560x1440 position 1920,0
+}
+
+profile {
+  output eDP-1 mode 1920x1080 scale 1.25 position 0,0
+}
