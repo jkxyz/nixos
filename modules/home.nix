@@ -37,12 +37,12 @@
         chromium-wayland
         gnome.polari
         calibre
-        ledger
         unstable.mongodb-compass
         unstable.firefox
         unstable.thunderbird
         unstable.libreoffice
         unstable.evince
+        gnome.gnome-calculator
       ];
 
       programs.bash.enable = true;
