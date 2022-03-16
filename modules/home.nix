@@ -32,7 +32,7 @@
         slack
         slack-wayland
         _1password-gui
-        spotify
+        unstable.spotify
         ungoogled-chromium
         chromium-wayland
         gnome.polari
