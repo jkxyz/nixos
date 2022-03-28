@@ -43,6 +43,9 @@
         unstable.libreoffice
         unstable.evince
         gnome.gnome-calculator
+        unstable.deluge
+        gnome.nautilus
+        filezilla
       ];
 
       programs.bash.enable = true;
@@ -64,6 +67,13 @@
         enable = true;
         latitude = 47.046501;
         longitude = 21.918944;
+      };
+
+      gtk = {
+        enable = true;
+        theme = {
+          name = "Adwaita";
+        };
       };
     };
 }
