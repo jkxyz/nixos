@@ -61,6 +61,10 @@
   (async/<! (async/timeout 1000))
   (recur))
 
+(defn disk []
+  (let [root (first (filter #(= (:filesystem %) "/dev/vg/root") (jc :df ["df" "--human-readable"])))]
+    {:full_text (str "Disk: " (:used root) "/" (:size root))}))
+
 (defn cpu []
   (when-let [usage (:cpu-usage @system-stats)]
     {:full_text (str "CPU: " usage "%")}))
@@ -70,7 +74,7 @@
     {:full_text (str "Memory: " free "M free")}))
 
 (defn status-blocks []
-  (filter some? [(cpu) (memory) (wifi) (battery) (clock)]))
+  (filter some? [(disk) (cpu) (memory) (wifi) (battery) (clock)]))
 
 (print (json/generate-string (status-blocks)))
 

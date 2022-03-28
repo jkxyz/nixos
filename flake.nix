@@ -13,7 +13,8 @@
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, nixos-hardware, ... }:
     let pkgs = import nixpkgs { system = "x86_64-linux"; };
     in {
-      devShell.x86_64-linux = pkgs.mkShell { buildInputs = [ pkgs.nvd ]; };
+      devShell.x86_64-linux =
+        pkgs.mkShell { buildInputs = [ pkgs.nvd pkgs.babashka ]; };
       nixosConfigurations = {
         sparrowhawk = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
