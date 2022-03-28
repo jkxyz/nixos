@@ -10,30 +10,33 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, nixos-hardware, ... }: {
-    nixosConfigurations = {
-      sparrowhawk = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel
-          ({ ... }: {
-            nixpkgs.overlays = [
-              (final: prev: {
-                unstable = import nixpkgs-unstable {
-                  system = prev.system;
-                  config.allowUnfree = true;
-                };
-              })
-            ];
-          })
-          ./modules/hosts/sparrowhawk.nix
-          ./modules/nix-flakes.nix
-          ./modules/home-manager.nix
-          ./modules/emacs-overlay.nix
-          ./modules/home.nix
-        ];
+  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, nixos-hardware, ... }:
+    let pkgs = import nixpkgs { system = "x86_64-linux"; };
+    in {
+      devShell.x86_64-linux = pkgs.mkShell { buildInputs = [ pkgs.nvd ]; };
+      nixosConfigurations = {
+        sparrowhawk = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel
+            ({ ... }: {
+              nixpkgs.overlays = [
+                (final: prev: {
+                  unstable = import nixpkgs-unstable {
+                    system = prev.system;
+                    config.allowUnfree = true;
+                  };
+                })
+              ];
+            })
+            ./modules/hosts/sparrowhawk.nix
+            ./modules/nix-flakes.nix
+            ./modules/home-manager.nix
+            ./modules/emacs-overlay.nix
+            ./modules/home.nix
+          ];
+        };
       };
     };
-  };
 }
