@@ -46,6 +46,7 @@
         unstable.deluge
         gnome.nautilus
         filezilla
+        unstable.nextcloud-client
       ];
 
       programs.bash.enable = true;
@@ -71,9 +72,7 @@
 
       gtk = {
         enable = true;
-        theme = {
-          name = "Adwaita";
-        };
+        theme = { name = "Adwaita"; };
       };
     };
 }
