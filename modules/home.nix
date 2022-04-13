@@ -47,6 +47,9 @@
         gnome.nautilus
         filezilla
         unstable.nextcloud-client
+        unstable.grim
+        unstable.slurp
+        gnome.eog
       ];
 
       programs.bash.enable = true;
