@@ -36,7 +36,7 @@
         ungoogled-chromium
         chromium-wayland
         gnome.polari
-        calibre
+        unstable.calibre
         unstable.mongodb-compass
         unstable.firefox
         unstable.thunderbird
