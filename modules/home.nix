@@ -25,7 +25,6 @@
         ./home/emacs.nix
         ./home/development.nix
         ./home/clojure.nix
-        ./home/syncthing.nix
       ];
 
       home.packages = with pkgs; [
