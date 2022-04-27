@@ -266,3 +266,5 @@ bindsym $mod+Mod1+1 exec grim -t jpeg ~/screenshots/$(date +%Y-%m-%d_%H-%m-%s).j
 
 # Take a Screenshot with the region select
 bindsym $mod+Mod1+2 exec grim -t jpeg -g "$(slurp)" ~/screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
+
+exec "systemctl --user import-environment; systemctl --user start sway-session.target"

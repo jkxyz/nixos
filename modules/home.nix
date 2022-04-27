@@ -45,11 +45,16 @@
         unstable.deluge
         gnome.nautilus
         filezilla
-        unstable.nextcloud-client
         unstable.grim
         unstable.slurp
         gnome.eog
+        unstable.nextcloud-client
       ];
+
+      services.nextcloud-client = {
+        enable = true;
+        package = pkgs.unstable.nextcloud-client;
+      };
 
       programs.bash.enable = true;
 
