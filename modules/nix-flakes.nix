@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  nix.package = pkgs.nixFlakes;
+  nix.package = pkgs.unstable.nixFlakes;
   nix.extraOptions = ''
     experimental-features = nix-command flakes
 
