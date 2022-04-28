@@ -12,9 +12,6 @@
   home-manager.users.josh = { pkgs, ... }:
 
     let
-      slack-wayland = pkgs.writers.writeBashBin "slack-wayland" ''
-        exec ${pkgs.unstable.slack}/bin/slack --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland
-      '';
       chromium-wayland = pkgs.writers.writeBashBin "chromium-wayland" ''
         exec ${pkgs.unstable.ungoogled-chromium}/bin/chromium --enable-features=UseOzonePlatform --ozone-platform=wayland
       '';
@@ -28,8 +25,7 @@
       ];
 
       home.packages = with pkgs; [
-        slack
-        slack-wayland
+        unstable.slack
         _1password-gui
         unstable.spotify
         ungoogled-chromium
@@ -56,7 +52,12 @@
         package = pkgs.unstable.nextcloud-client;
       };
 
-      programs.bash.enable = true;
+      programs.bash = {
+        enable = true;
+        initExtra = ''
+          source $HOME/.profile
+        '';
+      };
 
       programs.git = {
         enable = true;
