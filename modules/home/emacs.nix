@@ -9,7 +9,7 @@
     editorconfig-core-c
     fira-code
 
-    ((emacsPackagesNgGen emacsPgtkGcc).emacsWithPackages
+    ((emacsPackagesNgGen emacsPgtkNativeComp).emacsWithPackages
       (epkgs: [ epkgs.vterm ]))
 
     pamixer
