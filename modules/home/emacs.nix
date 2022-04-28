@@ -15,7 +15,7 @@
     pamixer
   ];
 
-  home.sessionPath = [ "~/.emacs.d/bin" ];
+  home.sessionPath = [ "$HOME/.emacs.d/bin" ];
 
   home.file.".doom.d".source = ./emacs/doom;
 }
