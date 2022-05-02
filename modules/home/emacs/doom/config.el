@@ -20,11 +20,13 @@
 ;; Tell projectile where to find projects
 (setq projectile-project-search-path '("~" "~/Code/" "~/Code/Nosco/"))
 
+(require 'magit)
+
 (defun jk/switch-project-action (_dir)
   "Run `magit-status' after switching to a new project."
   (if (not (magit-toplevel))
       (dired ".")
-      (magit-status)))
+      (magit-status-setup-buffer)))
 
 (setq +workspaces-switch-project-function #'jk/switch-project-action)
 
