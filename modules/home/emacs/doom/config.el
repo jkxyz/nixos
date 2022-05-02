@@ -32,12 +32,19 @@
   ;; Always enable smartparens-strict-mode
   :hook (evil-cleverparens-mode . smartparens-strict-mode))
 
-(load-file (concat (file-name-directory load-file-name) "/org.el"))
-
-(setq rmh-elfeed-org-files (list (concat org-directory "Feeds.org")))
-
 (use-package! lsp-ui
   :custom
   (lsp-ui-sideline-show-code-actions nil))
 
 (setq cljr-suppress-middleware-warnings t)
+
+(use-package! org
+  :config
+  (setq org-directory "~/Org/")
+  (setq org-agenda-files (list org-directory))
+
+  (setq org-archive-location (concat org-directory "archive.org::* %s"))
+
+  (setq org-capture-templates
+        '(("t" "todo" plain (file "inbox.org") "* TODO %?\n%U\n")
+          ("p" "project" plain (file "projects.org") "* %?\n"))))
