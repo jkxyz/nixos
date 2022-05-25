@@ -45,6 +45,7 @@
         unstable.slurp
         gnome.eog
         unstable.nextcloud-client
+        unstable.dbeaver
       ];
 
       services.nextcloud-client = {
