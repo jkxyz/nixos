@@ -262,9 +262,9 @@ exec_always swaywsr
 include /etc/sway/config.d/*
 
 # Take a screenshot with all output and save it into screenshots
-bindsym $mod+Mod1+1 exec grim -t jpeg ~/screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
+bindsym $mod+Mod1+1 exec grim -t jpeg $HOME/screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
 
 # Take a Screenshot with the region select
-bindsym $mod+Mod1+2 exec grim -t jpeg -g "$(slurp)" ~/screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
+bindsym $mod+Mod1+2 exec grim -t jpeg -g "$(slurp)" "$HOME/Screenshots/Screenshot $(date +%Y-%m-%d_%H-%m-%s).jpg"
 
 exec "systemctl --user import-environment; systemctl --user start sway-session.target"

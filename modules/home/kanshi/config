@@ -1,3 +1,6 @@
+# List outputs:
+# $ swaymsg --type get_outputs
+
 profile {
   # Set laptop display to scale 1 to fix Firefox/GTK popups issue with multiple monitors
   output eDP-1 mode 1920x1080 position 0,0
@@ -8,6 +11,12 @@ profile {
   # Set laptop display to scale 1 to fix Firefox/GTK popups issue with multiple monitors
   output eDP-1 mode 1920x1080 position 0,0
   output "Dell Inc. DELL S2721DGF D72JQ83" mode 2560x1440 position 1920,0
+}
+
+# Nosco office
+profile {
+  output eDP-1 mode 1920x1080
+  output "Goldstar Company Ltd LG Ultra HD 0x00008640" mode 3840x2160 scale 1.5
 }
 
 profile {
