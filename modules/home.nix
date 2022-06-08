@@ -46,6 +46,9 @@
         gnome.eog
         unstable.nextcloud-client
         unstable.dbeaver
+        unstable.obs-studio
+        unstable.obs-studio-plugins.wlrobs
+        unstable.vlc
       ];
 
       services.nextcloud-client = {
