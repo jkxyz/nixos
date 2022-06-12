@@ -126,6 +126,7 @@ in {
   services.blueman.enable = true;
 
   virtualisation.docker.enable = true;
+  virtualisation.docker.enableOnBoot = false;
 
   services.gnome.gnome-keyring.enable = true;
 

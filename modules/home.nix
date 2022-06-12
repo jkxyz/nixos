@@ -49,6 +49,7 @@
         unstable.obs-studio
         unstable.obs-studio-plugins.wlrobs
         unstable.vlc
+        unstable.htop
       ];
 
       services.nextcloud-client = {
