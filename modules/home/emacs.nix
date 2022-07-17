@@ -10,7 +10,7 @@
     fira-code
     pandoc
 
-    ((emacsPackagesNgGen emacsPgtkGcc).emacsWithPackages
+    ((emacsPackagesFor emacsPgtkNativeComp).emacsWithPackages
       (epkgs: [ epkgs.vterm ]))
 
     pamixer

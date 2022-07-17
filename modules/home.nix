@@ -73,7 +73,7 @@
 
       programs.direnv.enable = true;
       programs.direnv.nix-direnv.enable = true;
-      programs.direnv.nix-direnv.enableFlakes = true;
+      # programs.direnv.nix-direnv.enableFlakes = true;
 
       home.sessionVariables = { MOZ_ENABLE_WAYLAND = "1"; };
 

@@ -103,7 +103,7 @@ in {
   sound.enable = true;
   hardware.pulseaudio = {
     enable = true;
-    extraModules = [ pkgs.pulseaudio-modules-bt ];
+    # extraModules = [ pkgs.pulseaudio-modules-bt ];
     package = pkgs.pulseaudioFull;
   };
 
@@ -135,6 +135,8 @@ in {
     enable = true;
     package = pkgs.unstable.tailscale;
   };
+
+  networking.firewall.checkReversePath = "loose";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -2,11 +2,11 @@
   description = "Nix systems configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-21.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    emacs-overlay.url = "github:nix-community/emacs-overlay?rev=8603a233f2cb5b7ed504f102d4b1fce56b324b36";
-    home-manager.url = "github:nix-community/home-manager/release-21.11";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    home-manager.url = "github:nix-community/home-manager/release-22.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
