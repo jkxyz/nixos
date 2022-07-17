@@ -8,6 +8,7 @@
     nixfmt
     editorconfig-core-c
     fira-code
+    pandoc
 
     ((emacsPackagesNgGen emacsPgtkGcc).emacsWithPackages
       (epkgs: [ epkgs.vterm ]))
