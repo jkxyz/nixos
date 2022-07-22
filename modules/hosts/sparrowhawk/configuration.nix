@@ -90,7 +90,9 @@ in {
       (writeBabashka "/bin/jk-sway-status" ./jk_sway_status.clj)
       swaywsr
       kanshi
+      gnome.adwaita-icon-theme
     ];
+
     extraSessionCommands = ''
       export MOZ_ENABLE_WAYLAND=1
     '';
