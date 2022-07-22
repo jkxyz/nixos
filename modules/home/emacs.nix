@@ -10,6 +10,8 @@
     fira-code
     pandoc
 
+    gcc
+
     ((emacsPackagesFor emacsPgtkNativeComp).emacsWithPackages
       (epkgs: [ epkgs.vterm ]))
 

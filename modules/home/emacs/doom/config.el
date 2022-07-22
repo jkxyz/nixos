@@ -45,10 +45,13 @@
 (use-package! org
   :config
   (setq org-directory "~/Org/")
-  (setq org-agenda-files (list org-directory))
+  ;; (setq org-agenda-files (list org-directory))
 
   (setq org-archive-location (concat org-directory "archive.org::* %s"))
 
   (setq org-capture-templates
-        '(("t" "todo" plain (file "inbox.org") "* TODO %?\n%U\n")
-          ("p" "project" plain (file "projects.org") "* %?\n"))))
+        '(("t" "todo" plain (file "inbox.org") "* TODO %?\n%U\n"))))
+
+(use-package! org-roam
+  :config
+  (setq org-roam-directory (concat org-directory "roam/")))
