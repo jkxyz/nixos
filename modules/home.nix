@@ -50,6 +50,7 @@
         unstable.obs-studio-plugins.wlrobs
         unstable.vlc
         unstable.htop
+        unstable.gnome.vinagre
       ];
 
       services.nextcloud-client = {

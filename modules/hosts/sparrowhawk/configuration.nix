@@ -64,6 +64,9 @@ in {
   services.pipewire.enable = true;
   xdg.portal.wlr.enable = true;
 
+  # Gnome VirtualFS - Needed for nautilus to work properly
+  services.gvfs.enable = true;
+
   # Configure keymap in X11
   # services.xserver.layout = "us";
 
