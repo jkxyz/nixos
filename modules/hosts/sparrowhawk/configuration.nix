@@ -5,10 +5,8 @@ let
     pkgs.writers.makeScriptWriter { interpreter = "${pkgs.babashka}/bin/bb"; };
 
 in {
-  nix.binaryCaches = [
-    "https://cache.nixos.org"
-    "https://nix-community.cachix.org"
-  ];
+  nix.binaryCaches =
+    [ "https://cache.nixos.org" "https://nix-community.cachix.org" ];
 
   nix.binaryCachePublicKeys = [
     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
@@ -118,7 +116,7 @@ in {
 
   users.users.josh = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "docker" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" "scanner" ];
   };
 
   environment.systemPackages = with pkgs; [ git vim pavucontrol unzip ];
@@ -148,6 +146,9 @@ in {
 
   services.avahi.enable = true;
   services.avahi.nssmdns = true;
+
+  hardware.sane.enable = true;
+  hardware.sane.extraBackends = [ pkgs.hplipWithPlugin ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

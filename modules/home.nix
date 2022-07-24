@@ -1,13 +1,7 @@
 { lib, ... }:
 
 {
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "slack"
-      "1password"
-      "spotify"
-      "spotify-unwrapped"
-    ];
+  nixpkgs.config.allowUnfree = true;
 
   home-manager.users.josh = { pkgs, ... }:
 
