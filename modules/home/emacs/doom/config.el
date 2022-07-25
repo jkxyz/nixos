@@ -50,8 +50,20 @@
   (setq org-archive-location (concat org-directory "archive.org::* %s"))
 
   (setq org-capture-templates
-        '(("t" "todo" plain (file "inbox.org") "* TODO %?\n%U\n"))))
+        '(("t" "todo" plain (file "inbox.org") "* TODO %?\n%U\n")))
+
+  (setq org-link-file-path-type 'relative))
 
 (use-package! org-roam
   :config
   (setq org-roam-directory (concat org-directory "roam/")))
+
+(use-package! openwith
+  :init
+  (setq openwith-associations
+        (list
+         (list (openwith-make-extension-regexp
+                '("pdf"))
+               "evince"
+               '(file))))
+  (openwith-mode 1))

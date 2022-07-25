@@ -57,3 +57,5 @@
 
 ;; HACK Temporary fix for correctly starting shadow repl
 (package! parseclj :recipe (:build (:not compile)))
+
+(package! openwith)
