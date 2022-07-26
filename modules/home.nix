@@ -82,5 +82,7 @@
         enable = true;
         theme = { name = "Adwaita"; };
       };
+
+      services.kdeconnect.enable = true;
     };
 }
