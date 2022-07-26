@@ -52,18 +52,14 @@
   (setq org-capture-templates
         '(("t" "todo" plain (file "inbox.org") "* TODO %?\n%U\n")))
 
-  (setq org-link-file-path-type 'relative))
+  (setq org-link-file-path-type 'relative)
+
+  (setq org-file-apps
+        '((auto-mode . emacs)
+          (directory . emacs)
+          ("\\.pdf" . "evince \"%s\""))))
 
 (use-package! org-roam
   :config
   (setq org-roam-directory (concat org-directory "roam/")))
 
-(use-package! openwith
-  :init
-  (setq openwith-associations
-        (list
-         (list (openwith-make-extension-regexp
-                '("pdf"))
-               "evince"
-               '(file))))
-  (openwith-mode 1))
