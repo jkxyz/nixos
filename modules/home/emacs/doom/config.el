@@ -63,3 +63,10 @@
   :config
   (setq org-roam-directory (concat org-directory "roam/")))
 
+(defun jk/smartparens-clojure-mode-init ()
+  (sp-update-local-pairs '(:open "("
+                           :close ")"
+                           :actions (wrap insert autoskip navigate)
+                           :unless (sp-in-string-p sp-point-before-same-p))))
+
+(add-hook 'clojure-mode-hook 'jk/smartparens-clojure-mode-init)
