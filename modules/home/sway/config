@@ -1,3 +1,5 @@
+# -*- mode: prog -*-
+
 # Default config for sway
 #
 # Copy this to ~/.config/sway/config and edit it to your liking.
@@ -73,6 +75,7 @@ exec swayidle -w \
 #   }
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
+
 # Read `man 5 sway-input` for more information about this section.
 
 input type:touchpad {
