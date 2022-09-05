@@ -38,6 +38,7 @@ let
   port = 42001;
 
 in {
+  # TODO Move this to a system service with a dedicated user
   systemd.user.services.rss-bridge = {
     Unit = {
       Description = "RSS Bridge";
@@ -50,7 +51,7 @@ in {
       Environment = "JK_RSSBRIDGE_CACHE=${cacheDir}";
       ExecStartPre = "mkdir -p ${cacheDir}";
       ExecStart =
-        "${pkgs.php}/bin/php -S localhost:${port} -t ${package} ${router}";
+        "${pkgs.php}/bin/php -S localhost:${toString port} -t ${package} ${router}";
       Restart = "always";
     };
 
