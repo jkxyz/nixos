@@ -11,6 +11,8 @@
       '';
 
     in {
+      home.stateVersion = "22.05";
+
       imports = [
         ./home/sway.nix
         ./home/emacs.nix
@@ -21,9 +23,8 @@
 
       home.packages = with pkgs; [
         unstable.slack
-        _1password-gui
         unstable.spotify
-        ungoogled-chromium
+        unstable.ungoogled-chromium
         chromium-wayland
         gnome.polari
         unstable.calibre

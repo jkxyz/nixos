@@ -5,10 +5,10 @@ let
     pkgs.writers.makeScriptWriter { interpreter = "${pkgs.babashka}/bin/bb"; };
 
 in {
-  nix.binaryCaches =
+  nix.settings.substituters =
     [ "https://cache.nixos.org" "https://nix-community.cachix.org" ];
 
-  nix.binaryCachePublicKeys = [
+  nix.settings.trusted-public-keys = [
     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
   ];
 
@@ -92,6 +92,7 @@ in {
       swaywsr
       kanshi
       gnome.adwaita-icon-theme
+      lxde.lxsession
     ];
 
     extraSessionCommands = ''
@@ -156,6 +157,15 @@ in {
     enable = true;
     pinentryFlavor = "curses";
   };
+
+  programs._1password = { enable = true; };
+
+  programs._1password-gui = {
+    enable = true;
+    polkitPolicyOwners = [ "josh" ];
+  };
+
+  security.polkit.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

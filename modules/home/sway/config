@@ -271,3 +271,5 @@ bindsym $mod+Mod1+1 exec mkdir -p $HOME/Screenshots && grim -t jpeg "$HOME/Scree
 bindsym $mod+Mod1+2 exec mkdir -p $HOME/Screenshots && grim -t jpeg -g "$(slurp)" "$HOME/Screenshots/Screenshot $(date '+%d.%m.%Y %H:%m:%S').jpg"
 
 exec "systemctl --user import-environment; systemctl --user start sway-session.target"
+
+exec lxpolkit
