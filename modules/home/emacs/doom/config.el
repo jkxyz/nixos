@@ -70,3 +70,19 @@
                            :unless (sp-in-string-p sp-point-before-same-p))))
 
 (add-hook 'clojure-mode-hook 'jk/smartparens-clojure-mode-init)
+
+(after! mu4e
+  (setq sendmail-program (executable-find "msmtp")
+        send-mail-function #'smtpmail-send-it
+        message-sendmail-f-is-evil t
+        message-sendmail-extra-arguments '("--read-envelope-from")
+        message-send-mail-function #'message-send-mail-with-sendmail))
+
+(set-email-account! "josh@joshkingsley.me"
+  '((mu4e-sent-folder       . "/josh@joshkingsley.me/Sent")
+    (mu4e-drafts-folder     . "/josh@joshkingsley.me/Drafts")
+    (mu4e-trash-folder      . "/josh@joshkingsley.me/Trash")
+    (mu4e-refile-folder     . "/josh@joshkingsley.me/Archive")
+    (smtpmail-smtp-user     . "josh@joshkingsley.me")
+    (mu4e-compose-signature . "Best regards,\nJosh"))
+  t)

@@ -85,5 +85,10 @@
       };
 
       services.kdeconnect.enable = true;
+
+      programs.password-store.enable = true;
+      programs.password-store.settings = {
+        PASSWORD_STORE_DIR = "$HOME/Nextcloud/Pass";
+      };
     };
 }
