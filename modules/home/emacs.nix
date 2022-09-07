@@ -40,7 +40,7 @@ in {
       address = "josh@joshkingsley.me";
       userName = "josh@joshkingsley.me";
       flavor = "fastmail.com";
-      passwordCommand = "cat $HOME/.fastmailpassword";
+      passwordCommand = "op item get \"Fastmail sparrowhawk maildir\" --fields label=password";
       primary = true;
       mbsync = {
         enable = true;
@@ -58,6 +58,6 @@ in {
   services.mbsync = {
     enable = true;
     preExec = "${pkgs.isync}/bin/mbsync -Ha";
-    postExec = "${pkgs.mu}/bin/mu index -m $HOME/Maildir";
+    postExec = "${pkgs.mu}/bin/mu index";
   };
 }
