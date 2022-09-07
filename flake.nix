@@ -2,16 +2,15 @@
   description = "Nix systems configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    emacs-overlay.url = "path:./flakes/emacs-overlay";
-    home-manager.url = "github:nix-community/home-manager";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    home-manager.url = "github:nix-community/home-manager/release-22.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, nixos-hardware
-    , emacs-overlay, ... }:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, nixos-hardware, ... }:
     let pkgs = import nixpkgs { system = "x86_64-linux"; };
     in {
       devShell.x86_64-linux =
@@ -29,8 +28,6 @@
                     system = prev.system;
                     config.allowUnfree = true;
                   };
-
-                  emacs-overlay = emacs-overlay.packages.${prev.system};
                 })
               ];
             })

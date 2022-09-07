@@ -158,11 +158,17 @@ in {
     pinentryFlavor = "curses";
   };
 
-  programs._1password = { enable = true; };
+  programs._1password = {
+    enable = true;
+    package = pkgs.unstable._1password;
+    gid = 5000;
+  };
 
   programs._1password-gui = {
     enable = true;
+    package = pkgs.unstable._1password-gui;
     polkitPolicyOwners = [ "josh" ];
+    gid = 5001;
   };
 
   security.polkit.enable = true;
