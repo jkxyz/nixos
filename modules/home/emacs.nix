@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  emacs = (pkgs.emacsPackagesFor pkgs.emacs-overlay.emacsPgtkNativeComp).emacsWithPackages
+  emacs = (pkgs.emacsPackagesFor pkgs.emacsPgtkNativeComp).emacsWithPackages
     (epkgs: [ epkgs.vterm ]);
 
   emacsframe = pkgs.writers.writeBashBin "emacsframe" ''
