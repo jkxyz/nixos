@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  emacs = (pkgs.emacsPackagesFor pkgs.emacsPgtkNativeComp).emacsWithPackages
+  emacs = (pkgs.emacsPackagesFor pkgs.emacs-overlay.emacsPgtkNativeComp).emacsWithPackages
     (epkgs: [ epkgs.vterm ]);
 
   emacsframe = pkgs.writers.writeBashBin "emacsframe" ''
@@ -40,8 +40,7 @@ in {
       address = "josh@joshkingsley.me";
       userName = "josh@joshkingsley.me";
       flavor = "fastmail.com";
-      passwordCommand =
-        ''op item get "Fastmail sparrowhawk maildir" --fields label=password'';
+      passwordCommand = "op item get \"Fastmail sparrowhawk maildir\" --fields label=password";
       primary = true;
       mbsync = {
         enable = true;
