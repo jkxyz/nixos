@@ -12,7 +12,9 @@
 
     gcc
 
-    ((emacsPackagesFor emacsPgtkNativeComp).emacsWithPackages
+    binutils
+
+    ((unstable.emacsPackagesFor unstable.emacs).emacsWithPackages
       (epkgs: [ epkgs.vterm ]))
 
     pamixer
