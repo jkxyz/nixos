@@ -14,7 +14,7 @@
 
     binutils
 
-    ((unstable.emacsPackagesFor unstable.emacs).emacsWithPackages
+    ((emacsPackagesFor emacs).emacsWithPackages
       (epkgs: [ epkgs.vterm ]))
 
     pamixer
