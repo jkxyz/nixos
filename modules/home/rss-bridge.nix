@@ -2,19 +2,18 @@
 
 let
   package = pkgs.stdenv.mkDerivation rec {
-    pname = "rss-bridge";
-    version = "2022-06-14";
+    name = "rss-bridge";
 
     src = pkgs.fetchFromGitHub {
       owner = "RSS-Bridge";
       repo = "rss-bridge";
-      rev = version;
-      sha256 = "sha256-yH+m65CIZokZSbnv1zfpKC/Qr/mPPC6dG49Zn62X0l4=";
+      rev = "master";
+      sha256 = "sha256-ECo6TTxzzkIm1SZd82XqRN2QwAHSbBgtcI3iMwQoyuI=";
     };
 
     postPatch = ''
-      substituteInPlace lib/rssbridge.php \
-        --replace "define('PATH_CACHE', PATH_ROOT . 'cache/');" "define('PATH_CACHE', getenv('JK_RSSBRIDGE_CACHE'));" \
+      substituteInPlace lib/bootstrap.php \
+        --replace "const PATH_CACHE = __DIR__ . '/../cache/';" "define('PATH_CACHE', getenv('JK_RSSBRIDGE_CACHE'));"
     '';
 
     installPhase = ''
@@ -33,7 +32,7 @@ let
     }
   '';
 
-  cacheDir = "${config.xdg.cacheHome}/rss-bridge";
+  cacheDir = "${config.xdg.cacheHome}/rss-bridge/";
 
   port = 42001;
 
@@ -49,7 +48,7 @@ in {
     Service = {
       Type = "simple";
       Environment = "JK_RSSBRIDGE_CACHE=${cacheDir}";
-      ExecStartPre = "mkdir -p ${cacheDir}";
+      ExecStartPre = "${pkgs.bash}/bin/bash -c 'mkdir -p ${cacheDir}'";
       ExecStart =
         "${pkgs.php}/bin/php -S localhost:${toString port} -t ${package} ${router}";
       Restart = "always";
