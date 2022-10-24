@@ -152,6 +152,19 @@ in {
 
   programs.kdeconnect.enable = true;
 
+  programs._1password = {
+    enable = true;
+    package = pkgs.unstable._1password;
+    gid = 5001;
+  };
+
+  programs._1password-gui = {
+    enable = true;
+    package = pkgs.unstable._1password-gui;
+    gid = 5000;
+    polkitPolicyOwners = [ "josh" ];
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

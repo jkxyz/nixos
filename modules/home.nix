@@ -21,7 +21,6 @@
 
       home.packages = with pkgs; [
         unstable.slack
-        _1password-gui
         unstable.spotify
         ungoogled-chromium
         chromium-wayland
