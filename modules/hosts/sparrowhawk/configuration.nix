@@ -119,7 +119,7 @@ in {
     extraGroups = [ "wheel" "networkmanager" "docker" "scanner" ];
   };
 
-  environment.systemPackages = with pkgs; [ git vim pavucontrol unzip ];
+  environment.systemPackages = with pkgs; [ git vim pavucontrol unzip zip ];
 
   hardware.bluetooth.enable = true;
 

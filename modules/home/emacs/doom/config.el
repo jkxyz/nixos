@@ -70,3 +70,7 @@
                            :unless (sp-in-string-p sp-point-before-same-p))))
 
 (add-hook 'clojure-mode-hook 'jk/smartparens-clojure-mode-init)
+
+;; TODO Open PR for doom
+(use-package! web-mode
+  :mode "\\.njk\\'")
