@@ -74,3 +74,14 @@
 ;; TODO Open PR for doom
 (use-package! web-mode
   :mode "\\.njk\\'")
+
+(defun jk/toggle-cider-completion ()
+  "Toggle between lsp-mode and cider-mode completion in the current buffer."
+  (interactive)
+  (if (-contains-p completion-at-point-functions #'cider-complete-at-point)
+      (progn
+        (remove-hook 'completion-at-point-functions #'cider-complete-at-point t)
+        (add-hook 'completion-at-point-functions #'lsp-completion-at-point nil t))
+    (progn
+      (add-hook 'completion-at-point-functions #'cider-complete-at-point nil t)
+      (remove-hook 'completion-at-point-functions #'lsp-completion-at-point t))))
