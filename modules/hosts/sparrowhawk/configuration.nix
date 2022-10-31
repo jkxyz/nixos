@@ -59,7 +59,16 @@ in {
   #     [ pkgs.gnome.mutter pkgs.gsettings-desktop-schemas ];
   # };
 
-  services.pipewire.enable = true;
+  security.rtkit.enable = true;
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
+
   xdg.portal.wlr.enable = true;
 
   # Gnome VirtualFS - Needed for nautilus to work properly
@@ -103,12 +112,13 @@ in {
   # services.printing.enable = true;
 
   # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio = {
-    enable = true;
-    # extraModules = [ pkgs.pulseaudio-modules-bt ];
-    package = pkgs.pulseaudioFull;
-  };
+  # sound.enable = true;
+  # hardware.pulseaudio.enable = false;
+  # hardware.pulseaudio = {
+  #   enable = true;
+  #   # extraModules = [ pkgs.pulseaudio-modules-bt ];
+  #   package = pkgs.pulseaudioFull;
+  # };
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
@@ -119,7 +129,7 @@ in {
     extraGroups = [ "wheel" "networkmanager" "docker" "scanner" ];
   };
 
-  environment.systemPackages = with pkgs; [ git vim pavucontrol unzip zip ];
+  environment.systemPackages = with pkgs; [ git vim pavucontrol unzip zip qpwgraph ];
 
   hardware.bluetooth.enable = true;
 

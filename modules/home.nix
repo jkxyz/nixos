@@ -45,6 +45,7 @@
         unstable.vlc
         unstable.htop
         unstable.gnome.vinagre
+        unstable.neil
       ];
 
       services.nextcloud-client = {
