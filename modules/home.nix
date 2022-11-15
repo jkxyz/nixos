@@ -46,6 +46,7 @@
         unstable.htop
         unstable.gnome.vinagre
         unstable.neil
+        unstable.supercollider
       ];
 
       services.nextcloud-client = {

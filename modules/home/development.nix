@@ -7,5 +7,7 @@
     unstable.rustc
     unstable.cargo
     unstable.rust-analyzer
+    unstable.jdk
+    unstable.clojure
   ];
 }
