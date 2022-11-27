@@ -47,6 +47,7 @@
         unstable.gnome.vinagre
         unstable.neil
         unstable.supercollider
+        unstable.logseq
       ];
 
       services.nextcloud-client = {
