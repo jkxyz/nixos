@@ -18,7 +18,7 @@
 (setq display-line-numbers-type t)
 
 ;; Tell projectile where to find projects
-(setq projectile-project-search-path '("~" "~/Code/" "~/Code/Nosco/"))
+(setq projectile-project-search-path '("~" ("~/Code/" . 2)))
 
 (require 'magit)
 
