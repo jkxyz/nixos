@@ -43,21 +43,9 @@
 (setq cljr-suppress-middleware-warnings t)
 
 (use-package! org
-  :config
-  (setq org-directory "~/Org/")
-  ;; (setq org-agenda-files (list org-directory))
-
-  (setq org-archive-location (concat org-directory "archive.org::* %s"))
-
-  (setq org-capture-templates
-        '(("t" "todo" plain (file "inbox.org") "* TODO %?\n%U\n")))
-
-  (setq org-link-file-path-type 'relative)
-
-  (setq org-file-apps
-        '((auto-mode . emacs)
-          (directory . emacs)
-          ("\\.pdf" . "evince \"%s\""))))
+  :custom
+  (org-directory "~/Org/")
+  (org-capture-templates '(("j" "Journal entry" entry (file+datetree "Journal.org") "*** %U\n%?"))))
 
 (use-package! org-roam
   :config
