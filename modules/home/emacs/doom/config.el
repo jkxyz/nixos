@@ -45,7 +45,8 @@
 (use-package! org
   :custom
   (org-directory "~/Org/")
-  (org-capture-templates '(("j" "Journal entry" entry (file+datetree "Journal.org") "*** %U\n%?"))))
+  (org-capture-templates '(("j" "Journal entry" entry (file+olp+datetree "Journal.org") "*** %U\n%?")
+                           ("i" "Inbox" entry (file "Inbox.org") "* %?\n%U"))))
 
 (use-package! org-roam
   :config
