@@ -44,13 +44,16 @@
 
 (after! org
   (setq org-directory "~/Org/")
+
   (setq org-capture-templates
         '(("j" "Journal entry" entry (file+olp+datetree "Journal.org") "*** %U\n%?")
-          ("i" "Inbox" entry (file "Inbox.org") "* %?\n%U"))))
+          ("i" "Inbox" entry (file "Inbox.org") "* %?\n%U")))
 
-(use-package! org-roam
-  :config
-  (setq org-roam-directory (concat org-directory "roam/")))
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "PROJ(p)" "|" "DONE(d!)")
+          (sequence "|" "CANCELED(c!)")))
+
+  (setq org-log-into-drawer t))
 
 (defun jk/smartparens-clojure-mode-init ()
   (sp-update-local-pairs '(:open "("
@@ -60,7 +63,6 @@
 
 (add-hook 'clojure-mode-hook 'jk/smartparens-clojure-mode-init)
 
-;; TODO Open PR for doom
 (use-package! web-mode
   :mode "\\.njk\\'")
 
