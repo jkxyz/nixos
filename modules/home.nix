@@ -19,6 +19,8 @@
         ./home/rss-bridge.nix
       ];
 
+      home.stateVersion = "22.05";
+
       home.packages = with pkgs; [
         unstable.slack
         unstable.spotify

@@ -5,10 +5,10 @@ let
     pkgs.writers.makeScriptWriter { interpreter = "${pkgs.babashka}/bin/bb"; };
 
 in {
-  nix.binaryCaches =
+  nix.settings.substituters =
     [ "https://cache.nixos.org" "https://nix-community.cachix.org" ];
 
-  nix.binaryCachePublicKeys = [
+  nix.settings.trusted-public-keys = [
     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
   ];
 
@@ -165,13 +165,11 @@ in {
   programs._1password = {
     enable = true;
     package = pkgs.unstable._1password;
-    gid = 5001;
   };
 
   programs._1password-gui = {
     enable = true;
     package = pkgs.unstable._1password-gui;
-    gid = 5000;
     polkitPolicyOwners = [ "josh" ];
   };
 

@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  emacs = (pkgs.emacsPackagesFor pkgs.emacsPgtkNativeComp).emacsWithPackages
+  emacs = (pkgs.emacsPackagesFor pkgs.emacsPgtk).emacsWithPackages
     (epkgs: [
       epkgs.vterm
 
