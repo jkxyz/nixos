@@ -16,7 +16,7 @@ profile {
 # Nosco office
 profile {
   output eDP-1 mode 1920x1080
-  output "Goldstar Company Ltd LG Ultra HD 0x00008640" mode 3840x2160 scale 1.5
+  output "Goldstar Company Ltd LG Ultra HD 0x00000499" mode 3840x2160 scale 1.5
 }
 
 profile {
