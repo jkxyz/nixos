@@ -36,10 +36,6 @@
   ;; Always enable smartparens-strict-mode
   :hook (evil-cleverparens-mode . smartparens-strict-mode))
 
-(use-package! lsp-ui
-  :custom
-  (lsp-ui-sideline-show-code-actions nil))
-
 (setq cljr-suppress-middleware-warnings t)
 
 (after! org
@@ -66,13 +62,12 @@
 (use-package! web-mode
   :mode "\\.njk\\'")
 
-(defun jk/toggle-cider-completion ()
-  "Toggle between lsp-mode and cider-mode completion in the current buffer."
-  (interactive)
-  (if (-contains-p completion-at-point-functions #'cider-complete-at-point)
-      (progn
-        (remove-hook 'completion-at-point-functions #'cider-complete-at-point t)
-        (add-hook 'completion-at-point-functions #'lsp-completion-at-point nil t))
-    (progn
-      (add-hook 'completion-at-point-functions #'cider-complete-at-point nil t)
-      (remove-hook 'completion-at-point-functions #'lsp-completion-at-point t))))
+(after! clojure-mode
+  (add-hook! '(clojure-mode-local-vars-hook
+               clojurec-mode-local-vars-hook
+               clojurescript-mode-local-vars-hook)
+             :append
+             (defun jk/configure-lsp-clojure ()
+               (setq-local lsp-enable-indentation nil
+                           lsp-completion-enable nil))
+             #'lsp!))
