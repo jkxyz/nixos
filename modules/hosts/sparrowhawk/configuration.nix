@@ -22,8 +22,8 @@ in {
 
   networking.hostName = "sparrowhawk";
 
-  time.timeZone = "Europe/Bucharest";
-  # time.timeZone = "Europe/London";
+  # time.timeZone = "Europe/Bucharest";
+  time.timeZone = "Europe/London";
   # time.timeZone = "America/Los_Angeles";
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
