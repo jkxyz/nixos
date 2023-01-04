@@ -20,5 +20,5 @@ profile {
 }
 
 profile {
-  output eDP-1 mode 1920x1080 scale 1.25 position 0,0
+  output eDP-1 mode 1920x1080 position 0,0
 }
