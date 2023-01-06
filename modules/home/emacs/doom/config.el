@@ -1,7 +1,7 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; TODO Find a way to make this more portable
-(setq custom-file "~/Code/configuration/modules/home/emacs/doom/custom.el")
+(setq custom-file "~/.emacs-custom.el")
+(load custom-file 'noerror)
 
 (setq user-full-name "Josh Kingsley"
       user-mail-address "josh@joshkingsley.me")
@@ -40,6 +40,8 @@
 
 (after! org
   (setq org-directory "~/Org/")
+
+  (setq org-agenda-files (list org-directory))
 
   (setq org-capture-templates
         '(("j" "Journal entry" entry (file+olp+datetree "Journal.org") "*** %U\n%?")
