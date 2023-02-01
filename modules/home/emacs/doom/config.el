@@ -48,7 +48,7 @@
           ("i" "Inbox" entry (file "Inbox.org") "* %?\n%U")))
 
   (setq org-todo-keywords
-        '((sequence "TODO(t)" "PROJ(p)" "|" "DONE(d!)")
+        '((sequence "TODO(t)" "WAIT(w)" "PROJ(p)" "|" "DONE(d!)")
           (sequence "|" "CANCELED(c!)")))
 
   (setq org-log-into-drawer t))
