@@ -23,7 +23,6 @@
 
       home.packages = with pkgs; [
         unstable.slack
-        unstable.spotify
         ungoogled-chromium
         chromium-wayland
         gnome.polari
@@ -50,6 +49,8 @@
         unstable.neil
         unstable.supercollider
         unstable.logseq
+        unstable.keepassxc
+        unstable.audacity
       ];
 
       services.nextcloud-client = {
