@@ -16,27 +16,17 @@
 
       home.packages = with pkgs; [
         unstable.slack
-        gnome.polari
-        unstable.calibre
         gnome.gnome-calculator
-        unstable.deluge
         gnome.nautilus
-        filezilla
         unstable.grim
         unstable.slurp
         gnome.eog
         unstable.nextcloud-client
         unstable.htop
-        unstable.gnome.vinagre
-        unstable.neil
         unstable.keepassxc
         unstable.firefox
+        xdg-utils
       ];
-
-      services.nextcloud-client = {
-        enable = true;
-        package = pkgs.unstable.nextcloud-client;
-      };
 
       programs.bash = {
         enable = true;
