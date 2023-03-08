@@ -108,6 +108,22 @@ in {
     '';
   };
 
+  services.greetd = let
+    swayConfig = pkgs.writeText "greetd-sway-config" ''
+      # Fix from here: https://github.com/swaywm/sway/wiki#gtk-applications-take-20-seconds-to-start
+      exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+      exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet --layer-shell --command sway; swaymsg exit"
+    '';
+  in {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.sway}/bin/sway --config ${swayConfig}";
+      };
+    };
+  };
+
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
@@ -129,7 +145,14 @@ in {
     extraGroups = [ "wheel" "networkmanager" "docker" "scanner" ];
   };
 
-  environment.systemPackages = with pkgs; [ git vim pavucontrol unzip zip qpwgraph ];
+  environment.systemPackages = with pkgs; [
+    git
+    vim
+    pavucontrol
+    unzip
+    zip
+    qpwgraph
+  ];
 
   hardware.bluetooth.enable = true;
 
