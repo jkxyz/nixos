@@ -42,7 +42,7 @@ exec mako
 
 exec_always kanshi
 
-output * background ~/.config/sway/background.jpg fill
+output * background ~/.config/sway/backgrounds/Galaxy.jpg fill
 
 ### Idle configuration
 #

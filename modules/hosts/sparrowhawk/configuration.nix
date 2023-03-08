@@ -109,11 +109,29 @@ in {
   };
 
   services.greetd = let
+    greetdStyle = pkgs.writeText "greetd.css" ''
+      window {
+        background-image: url("file://${../../home/sway/backgrounds/Galaxy.jpg}");
+        background-size: cover;
+        background-position: center;
+      }
+
+      box#body {
+        background-color: rgba(50, 50, 50, 0.5);
+        border-radius: 10px;
+        padding: 50px;
+        color: #fafafa;
+      }
+
+      #clock {
+        color: rgba(250, 250, 250, 0.8);
+      }
+    '';
     swayConfig = pkgs.writeText "greetd-sway-config" ''
       # Fix from here: https://github.com/swaywm/sway/wiki#gtk-applications-take-20-seconds-to-start
       exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
-      exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet --layer-shell --command sway; swaymsg exit"
+      exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet --layer-shell --command sway --style ${greetdStyle}; swaymsg exit"
     '';
   in {
     enable = true;
