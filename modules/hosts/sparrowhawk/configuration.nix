@@ -84,7 +84,7 @@ in {
     wrapperFeatures.gtk = true;
     extraPackages = with pkgs; [
       alacritty
-      wofi
+      rofi
       mako
       swaylock
       swayidle

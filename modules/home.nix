@@ -26,11 +26,6 @@
         chromium-wayland
         gnome.polari
         unstable.calibre
-        unstable.mongodb-compass
-        unstable.firefox
-        unstable.thunderbird
-        unstable.libreoffice
-        unstable.evince
         gnome.gnome-calculator
         unstable.deluge
         gnome.nautilus
@@ -39,17 +34,9 @@
         unstable.slurp
         gnome.eog
         unstable.nextcloud-client
-        unstable.dbeaver
-        unstable.obs-studio
-        unstable.obs-studio-plugins.wlrobs
-        unstable.vlc
         unstable.htop
         unstable.gnome.vinagre
         unstable.neil
-        unstable.supercollider
-        unstable.logseq
-        unstable.keepassxc
-        unstable.audacity
       ];
 
       services.nextcloud-client = {
@@ -85,7 +72,10 @@
 
       gtk = {
         enable = true;
-        theme = { name = "Adwaita"; };
+        theme = {
+          package = pkgs.gnome.gnome-themes-extra;
+          name = "Adwaita-dark";
+        };
       };
 
       services.kdeconnect.enable = true;
