@@ -84,7 +84,7 @@ in {
     wrapperFeatures.gtk = true;
     extraPackages = with pkgs; [
       alacritty
-      rofi
+      rofi-wayland
       mako
       swaylock
       swayidle
@@ -100,6 +100,8 @@ in {
       swaywsr
       kanshi
       gnome.adwaita-icon-theme
+      unstable.waybar
+      unstable.font-awesome
     ];
 
     extraSessionCommands = ''

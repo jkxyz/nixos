@@ -244,20 +244,24 @@ exec systemctl --user start gammastep.service
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
+# bar {
+#     position top
+
+#     # When the status_command prints a new line to stdout, swaybar updates.
+#     # TODO Write this to use the swaybar protocol
+#     status_command jk-sway-status
+
+#     separator_symbol "|"
+
+#     colors {
+#         statusline #ffffff
+#         background #323232
+#         inactive_workspace #323232 #323232 #5c5c5c
+#     }
+# }
+
 bar {
-    position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # TODO Write this to use the swaybar protocol
-    status_command jk-sway-status
-
-    separator_symbol "|"
-
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #323232 #323232 #5c5c5c
-    }
+    swaybar_command waybar
 }
 
 exec_always swaywsr
@@ -265,6 +269,12 @@ exec_always swaywsr
 exec nextcloud
 exec keepassxc
 exec emacs --daemon
+
+gaps inner 15
+gaps outer 4
+smart_gaps on
+default_border pixel 1
+hide_edge_borders both
 
 include /etc/sway/config.d/*
 
