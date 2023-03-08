@@ -96,7 +96,6 @@ in {
       sysstat
       swaybg
       jc
-      networkmanager_dmenu
       (writeBabashka "/bin/jk-sway-status" ./jk_sway_status.clj)
       swaywsr
       kanshi
