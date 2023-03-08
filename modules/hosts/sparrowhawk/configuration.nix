@@ -175,6 +175,8 @@ in {
 
   programs.thunar.enable = true;
 
+  services.flatpak.enable = true;
+
   # TODO Enable tlp
 
   # This value determines the NixOS release from which the default
