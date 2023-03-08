@@ -16,7 +16,6 @@
         ./home/emacs.nix
         ./home/development.nix
         ./home/clojure.nix
-        ./home/rss-bridge.nix
       ];
 
       home.stateVersion = "22.05";
