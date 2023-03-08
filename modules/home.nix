@@ -4,13 +4,7 @@
   nixpkgs.config.allowUnfree = true;
 
   home-manager.users.josh = { pkgs, ... }:
-
-    let
-      chromium-wayland = pkgs.writers.writeBashBin "chromium-wayland" ''
-        exec ${pkgs.unstable.ungoogled-chromium}/bin/chromium --enable-features=UseOzonePlatform --ozone-platform=wayland
-      '';
-
-    in {
+    {
       imports = [
         ./home/sway.nix
         ./home/emacs.nix
@@ -22,8 +16,6 @@
 
       home.packages = with pkgs; [
         unstable.slack
-        ungoogled-chromium
-        chromium-wayland
         gnome.polari
         unstable.calibre
         gnome.gnome-calculator
@@ -37,6 +29,8 @@
         unstable.htop
         unstable.gnome.vinagre
         unstable.neil
+        unstable.keepassxc
+        unstable.firefox
       ];
 
       services.nextcloud-client = {
