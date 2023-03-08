@@ -15,7 +15,6 @@
       home.stateVersion = "22.05";
 
       home.packages = with pkgs; [
-        unstable.slack
         gnome.gnome-calculator
         gnome.nautilus
         unstable.grim
@@ -25,7 +24,9 @@
         unstable.htop
         unstable.keepassxc
         unstable.firefox
+        unstable.thunderbird
         xdg-utils
+        unstable.slack
       ];
 
       programs.bash = {

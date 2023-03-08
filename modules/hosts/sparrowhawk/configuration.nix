@@ -69,7 +69,11 @@ in {
     jack.enable = true;
   };
 
-  xdg.portal.wlr.enable = true;
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
 
   # Gnome VirtualFS - Needed for nautilus to work properly
   services.gvfs.enable = true;
