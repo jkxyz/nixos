@@ -34,7 +34,7 @@
             ./modules/hosts/sparrowhawk.nix
             ./modules/nix-flakes.nix
             ./modules/home-manager.nix
-            ./modules/emacs-overlay.nix
+            # ./modules/emacs-overlay.nix
             ./modules/home.nix
           ];
         };

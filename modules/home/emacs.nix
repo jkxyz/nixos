@@ -1,16 +1,17 @@
 { pkgs, ... }:
 
 let
-  emacs = (pkgs.emacsPackagesFor pkgs.emacsPgtk).emacsWithPackages
-    (epkgs: [
-      epkgs.vterm
+  emacsPgtk = pkgs.unstable.emacs.override { withPgtk = true; };
+  emacsWithPackages =
+    (pkgs.unstable.emacsPackagesFor emacsPgtk).emacsWithPackages (epkgs:
+      with epkgs; [
+        vterm
 
-      # FIXME These packages were required to get `doom sync` to run properly
-      epkgs.dash
-      epkgs.f
-      epkgs.pkg-info
-    ]);
-
+        # FIXME These packages were required to get `doom sync` to run properly
+        dash
+        f
+        pkg-info
+      ]);
 in {
   home.packages = with pkgs; [
     ripgrep
@@ -31,6 +32,6 @@ in {
 
   programs.emacs = {
     enable = true;
-    package = emacs;
+    package = emacsWithPackages;
   };
 }
