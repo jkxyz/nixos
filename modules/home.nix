@@ -27,6 +27,9 @@
         unstable.thunderbird
         xdg-utils
         unstable.slack
+        unstable.evince
+        unstable.simple-scan
+        unstable.bitwig-studio
       ];
 
       programs.bash = {

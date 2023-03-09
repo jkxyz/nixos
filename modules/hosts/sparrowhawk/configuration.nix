@@ -165,7 +165,7 @@ in {
 
   users.users.josh = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "docker" "scanner" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" "scanner" "lp" ];
   };
 
   environment.systemPackages = with pkgs; [
