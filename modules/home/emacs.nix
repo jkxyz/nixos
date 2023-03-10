@@ -3,15 +3,8 @@
 let
   emacsPgtk = pkgs.unstable.emacs.override { withPgtk = true; };
   emacsWithPackages =
-    (pkgs.unstable.emacsPackagesFor emacsPgtk).emacsWithPackages (epkgs:
-      with epkgs; [
-        vterm
-
-        # FIXME These packages were required to get `doom sync` to run properly
-        dash
-        f
-        pkg-info
-      ]);
+    (pkgs.unstable.emacsPackagesFor emacsPgtk).emacsWithPackages
+    (epkgs: with epkgs; [ vterm ]);
 in {
   home.packages = with pkgs; [
     ripgrep
