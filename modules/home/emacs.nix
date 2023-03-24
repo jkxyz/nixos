@@ -1,9 +1,8 @@
 { pkgs, ... }:
 
 let
-  emacsPgtk = pkgs.unstable.emacs.override { withPgtk = true; };
-  emacsWithPackages =
-    (pkgs.unstable.emacsPackagesFor emacsPgtk).emacsWithPackages
+  emacsPgtk = pkgs.emacs.emacs.override { withPgtk = true; };
+  emacsWithPackages = (pkgs.emacs.emacsPackagesFor emacsPgtk).emacsWithPackages
     (epkgs: with epkgs; [ vterm ]);
 in {
   home.packages = with pkgs; [
