@@ -30,6 +30,7 @@
         unstable.evince
         unstable.simple-scan
         unstable.bitwig-studio
+        unstable.calibre
       ];
 
       programs.bash = {
