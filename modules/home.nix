@@ -63,7 +63,8 @@
         enable = true;
         theme = {
           package = pkgs.gnome.gnome-themes-extra;
-          name = "Adwaita-dark";
+          # TODO Add a way to toggle light/dark
+          name = "Adwaita";
         };
       };
 
