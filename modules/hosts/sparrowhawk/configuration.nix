@@ -223,6 +223,8 @@ in {
 
   services.flatpak.enable = true;
 
+  programs.ssh.startAgent = true;
+
   # TODO Enable tlp
 
   # This value determines the NixOS release from which the default
