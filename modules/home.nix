@@ -31,6 +31,7 @@
         unstable.simple-scan
         unstable.bitwig-studio
         unstable.calibre
+        unstable.wl-color-picker
       ];
 
       programs.bash = {
