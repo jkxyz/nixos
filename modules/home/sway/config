@@ -266,7 +266,7 @@ bar {
 
 exec_always swaywsr
 
-exec nextcloud
+exec nextcloud --background
 exec keepassxc
 exec emacs --daemon
 
