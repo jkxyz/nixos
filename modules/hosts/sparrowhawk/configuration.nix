@@ -225,6 +225,8 @@ in {
 
   programs.ssh.startAgent = true;
 
+  services.fwupd.enable = true;
+
   # TODO Enable tlp
 
   # This value determines the NixOS release from which the default
