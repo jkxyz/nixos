@@ -32,6 +32,7 @@
         unstable.bitwig-studio
         unstable.calibre
         unstable.wl-color-picker
+        unstable.qjackctl
       ];
 
       programs.bash = {
