@@ -29,10 +29,8 @@
         unstable.slack
         unstable.evince
         unstable.simple-scan
-        unstable.bitwig-studio
         unstable.calibre
         unstable.wl-color-picker
-        unstable.qjackctl
       ];
 
       programs.bash = {
