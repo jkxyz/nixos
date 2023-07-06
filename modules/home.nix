@@ -31,6 +31,7 @@
       unstable.calibre
       unstable.wl-color-picker
       (callPackage (import ../pianoteq.nix) { })
+      (callPackage (import ../vcv-rack.nix) { })
     ];
 
     programs.bash = {

@@ -20,16 +20,20 @@
       devShell.x86_64-linux =
         pkgs.mkShell { buildInputs = [ pkgs.nvd pkgs.babashka ]; };
 
-      packages.x86_64-linux.firefox-nightly-bin = let
-        pkgs = import nixpkgs {
-          system = "x86_64-linux";
-          overlays = [ nixpkgs-mozilla.overlays.firefox ];
-        };
-      in pkgs.latest.firefox-nightly-bin;
-
-      packages.x86_64-linux.pianoteq =
+      packages.x86_64-linux =
         let pkgs = import nixpkgs { system = "x86_64-linux"; };
-        in pkgs.callPackage (import ./pianoteq.nix) { };
+        in {
+          pianoteq = pkgs.callPackage (import ./pianoteq.nix) { };
+
+          vcv-rack = pkgs.callPackage (import ./vcv-rack.nix) { };
+
+          firefox-nightly-bin = let
+            pkgs = import nixpkgs {
+              system = "x86_64-linux";
+              overlays = [ nixpkgs-mozilla.overlays.firefox ];
+            };
+          in pkgs.latest.firefox-nightly-bin;
+        };
 
       nixosConfigurations = {
         sparrowhawk = nixpkgs.lib.nixosSystem {

@@ -38,9 +38,6 @@ stdenv.mkDerivation rec {
   ];
 
   installPhase = ''
-    # ls -alh 'Pianoteq 8/x86-64bit/Pianoteq 8.lv2'
-    # exit 1
-
     install -Dm 755 'Pianoteq 8/x86-64bit/Pianoteq 8' $out/bin/pianoteq8
     install -Dm 755 'Pianoteq 8/x86-64bit/Pianoteq 8.lv2/Pianoteq_8.so' "$out/lib/lv2/Pianoteq 8.lv2/Pianoteq_8.so"
 
@@ -54,6 +51,7 @@ stdenv.mkDerivation rec {
     runHook postInstall
   '';
 
+  # TODO Don't think this is required
   fixupPhase = ''
     makeWrapper $out/bin/pianoteq8 $out/bin/pianoteq8_wrapped --prefix LD_LIBRARY_PATH : "$libPath"
   '';
