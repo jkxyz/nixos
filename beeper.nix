@@ -2,14 +2,14 @@
 , appimage-run }:
 
 let
-  version = "3.63.16";
+  version = "3.64.5";
 
   # nix hash file beeper-x.AppImage
   # nix-store --add-fixed sha256 beeper-x.AppImage
   beeperAppImage = requireFile {
     name = "beeper-${version}.AppImage";
-    sha256 = "sha256-fLHzLhcMXMiLQMkxRr+B4qK5i5MOzgz7LJLRb5RtoFA=";
-    message = "Download Beeper AppImage file.";
+    sha256 = "sha256-Od8nuKeoQebpStR+33yJKMWf71Q9gvBqH10sGdd1PR4=";
+    message = "Download Beeper AppImage file: https://www.beeper.com/download";
   };
 
   launcherScript = writeShellScript "beeper-launcher" ''
