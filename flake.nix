@@ -27,6 +27,8 @@
 
           vcv-rack = pkgs.callPackage (import ./vcv-rack.nix) { };
 
+          beeper = pkgs.callPackage (import ./beeper.nix) { };
+
           firefox-nightly-bin = let
             pkgs = import nixpkgs {
               system = "x86_64-linux";
