@@ -23,9 +23,9 @@
 
       packages.x86_64-linux = {
         # These packages can be installed into a profile with `nix profile install .#PKG`
-        pianoteq = pkgs.callPackage (import ./pianoteq.nix) { }; # Requires pianoteq binary to be added to store
-        beeper = pkgs.callPackage (import ./beeper.nix) { }; # TODO Install AppImage non-declaratively
-        vcv-rack = pkgs.callPackage (import ./vcv-rack.nix) { };
+        pianoteq = pkgs.callPackage (import ./pkgs/pianoteq.nix) { };
+        beeper = pkgs.callPackage (import ./pkgs/beeper.nix) { };
+        vcv-rack = pkgs.callPackage (import ./pkgs/vcv-rack.nix) { };
 
         firefox-nightly-bin = let
           pkgs = import nixpkgs {
