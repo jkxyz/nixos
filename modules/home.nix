@@ -30,7 +30,6 @@
       unstable.simple-scan
       unstable.calibre
       unstable.wl-color-picker
-      (callPackage (import ../vcv-rack.nix) { })
     ];
 
     programs.bash = {

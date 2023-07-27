@@ -41,7 +41,7 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./nixos
-            ./modules/hosts/sparrowhawk.nix
+            ./hosts/sparrowhawk
             ./modules/home-manager.nix
             ./modules/home.nix
           ];

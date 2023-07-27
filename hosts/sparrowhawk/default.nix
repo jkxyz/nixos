@@ -5,7 +5,10 @@ let
     pkgs.writers.makeScriptWriter { interpreter = "${pkgs.babashka}/bin/bb"; };
 
 in {
-  imports = [ inputs.nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel ];
+  imports = [
+    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel
+    ./hardware-configuration.nix
+  ];
 
   nix.settings.substituters =
     [ "https://cache.nixos.org" "https://nix-community.cachix.org" ];
