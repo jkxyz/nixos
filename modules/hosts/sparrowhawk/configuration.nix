@@ -59,6 +59,11 @@ in {
   #     [ pkgs.gnome.mutter pkgs.gsettings-desktop-schemas ];
   # };
 
+  services.xserver.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.displayManager.defaultSession = "plasmawayland";
+
   security.rtkit.enable = true;
 
   services.pipewire = {
@@ -84,7 +89,7 @@ in {
   services.upower.enable = true;
 
   programs.sway = {
-    enable = true;
+    enable = false;
     wrapperFeatures.gtk = true;
     extraPackages = with pkgs; [
       alacritty
@@ -139,7 +144,7 @@ in {
       exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet --layer-shell --command sway --style ${greetdStyle}; swaymsg exit"
     '';
   in {
-    enable = true;
+    enable = false;
     settings = {
       default_session = {
         command = "${pkgs.sway}/bin/sway --config ${swayConfig}";
