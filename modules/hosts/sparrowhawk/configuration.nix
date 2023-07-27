@@ -1,10 +1,12 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 let
   writeBabashka =
     pkgs.writers.makeScriptWriter { interpreter = "${pkgs.babashka}/bin/bb"; };
 
 in {
+  imports = [ inputs.nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel ];
+
   nix.settings.substituters =
     [ "https://cache.nixos.org" "https://nix-community.cachix.org" ];
 
@@ -123,7 +125,9 @@ in {
   services.greetd = let
     greetdStyle = pkgs.writeText "greetd.css" ''
       window {
-        background-image: url("file://${../../home/sway/backgrounds/Galaxy.jpg}");
+        background-image: url("file://${
+          ../../home/sway/backgrounds/Galaxy.jpg
+        }");
         background-size: cover;
         background-position: center;
       }
