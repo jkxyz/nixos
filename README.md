@@ -2,7 +2,7 @@
 
 This repository contains NixOS modules and configurations for my personal machines.
 
-Please feel free to borrow anything you find useful! ❤️
+This code is in the public domain. Please feel free to take anything you find useful! ❤️
 
 ## Building
 
