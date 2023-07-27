@@ -10,6 +10,9 @@ in {
     ./hardware-configuration.nix
   ];
 
+  jkxyz.home.users.josh.enable = true;
+  jkxyz.nix.persistDerivations = true;
+
   nix.settings.substituters =
     [ "https://cache.nixos.org" "https://nix-community.cachix.org" ];
 

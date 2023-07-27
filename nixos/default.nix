@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  imports = [ ./unstable.nix ./nix.nix ];
+  imports = [ ./unstable.nix ./nix.nix ./home.nix ];
 }
