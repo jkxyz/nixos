@@ -51,23 +51,23 @@
     programs.direnv.nix-direnv.enable = true;
     # programs.direnv.nix-direnv.enableFlakes = true;
 
-    home.sessionVariables = { MOZ_ENABLE_WAYLAND = "1"; };
+    # home.sessionVariables = { MOZ_ENABLE_WAYLAND = "1"; };
 
-    services.gammastep = {
-      enable = true;
-      latitude = 47.046501;
-      longitude = 21.918944;
-    };
+    # services.gammastep = {
+    #   enable = true;
+    #   latitude = 47.046501;
+    #   longitude = 21.918944;
+    # };
 
-    gtk = {
-      enable = true;
-      theme = {
-        package = pkgs.gnome.gnome-themes-extra;
-        # TODO Add a way to toggle light/dark
-        name = "Adwaita";
-      };
-    };
+    # gtk = {
+    #   enable = true;
+    #   theme = {
+    #     package = pkgs.gnome.gnome-themes-extra;
+    #     # TODO Add a way to toggle light/dark
+    #     name = "Adwaita";
+    #   };
+    # };
 
-    services.kdeconnect.enable = true;
+    # services.kdeconnect.enable = true;
   };
 }

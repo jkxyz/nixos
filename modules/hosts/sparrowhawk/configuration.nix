@@ -83,6 +83,8 @@ in {
   # Gnome VirtualFS - Needed for nautilus to work properly
   services.gvfs.enable = true;
 
+  programs.dconf.enable = true;
+
   # Configure keymap in X11
   # services.xserver.layout = "us";
 

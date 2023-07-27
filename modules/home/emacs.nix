@@ -1,8 +1,9 @@
 { pkgs, ... }:
 
 let
-  emacsPgtk = pkgs.emacs.emacs.override { withPgtk = true; };
-  emacsWithPackages = (pkgs.emacs.emacsPackagesFor emacsPgtk).emacsWithPackages
+  emacsPgtk = pkgs.unstable.emacs29-pgtk;
+  emacsWithPackages =
+    (pkgs.unstable.emacsPackagesFor emacsPgtk).emacsWithPackages
     (epkgs: with epkgs; [ vterm ]);
 in {
   home.packages = with pkgs; [
@@ -25,5 +26,13 @@ in {
   programs.emacs = {
     enable = true;
     package = emacsWithPackages;
+  };
+
+  services.emacs = {
+    enable = true;
+    package = emacsWithPackages;
+    client.enable = true;
+    defaultEditor = true;
+    startWithUserSession = "graphical";
   };
 }
