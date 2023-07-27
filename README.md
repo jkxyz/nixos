@@ -19,11 +19,7 @@ $ ./rebuild switch
 Some packages require extra steps to install, or for some other reason I choose not
 to install them declaratively, such as taking a long time to build.
 
-These packages are provided as flake outputs, and can be installed imperatively:
-
-```
-$ nix profile install .#pianoteq
-```
+These packages are provided as flake outputs, and can be installed imperatively.
 
 ### Pianoteq
 
@@ -40,4 +36,10 @@ Then get the hash of the file and ensure the hash is matching in `pkgs/pianoteq.
 
 ```
 $ nix hash file pianoteq/pianoteq_linux_v811.7z
+```
+
+Then the package can be installed into a Nix profile with:
+
+```
+$ nix profile install .#pianoteq
 ```
