@@ -14,7 +14,8 @@
   config = {
     nix.settings = {
       experimental-features = [ "nix-command" "flakes" ];
-    } // lib.mkIf config.jkxyz.nix.persistDerivations {
+
+      # TODO Make conditional
       keep-outputs = true;
       keep-derivations = true;
     };

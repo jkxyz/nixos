@@ -82,11 +82,11 @@ in {
     jack.enable = true;
   };
 
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  };
+  # xdg.portal = {
+  #   enable = true;
+  #   wlr.enable = true;
+  #   extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  # };
 
   # Gnome VirtualFS - Needed for nautilus to work properly
   services.gvfs.enable = true;
@@ -200,8 +200,6 @@ in {
     General = { Enable = "Source,Sink,Media,Socket"; };
   };
 
-  services.blueman.enable = true;
-
   virtualisation.docker.enable = true;
   virtualisation.docker.enableOnBoot = false;
 
@@ -243,6 +241,8 @@ in {
   programs.ssh.startAgent = true;
 
   services.fwupd.enable = true;
+
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # TODO Enable tlp
 
