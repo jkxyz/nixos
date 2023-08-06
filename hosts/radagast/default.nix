@@ -19,6 +19,8 @@
 
   boot.kernelModules = [ "wl" ];
 
+  boot.kernelParams = [ "consoleblank=60" ];
+
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
 
   networking.hostName = "radagast";
