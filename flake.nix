@@ -48,6 +48,12 @@
           ];
         };
 
+        # MacBook Pro 2017 home server
+        radagast = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ ./hosts/radagast ];
+        };
+
         # Custom NixOS installation media with proprietary broadcom wifi drivers
         # Build with nix build .#nixosConfigurations.config.system.build.isoImage
         iso = nixpkgs.lib.nixosSystem {
