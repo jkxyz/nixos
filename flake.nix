@@ -36,6 +36,7 @@
       };
 
       nixosConfigurations = {
+        # ThinkPad E14 laptop
         sparrowhawk = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
@@ -44,6 +45,41 @@
             ./hosts/sparrowhawk
             ./modules/home-manager.nix
             ./modules/home.nix
+          ];
+        };
+
+        # Custom NixOS installation media with proprietary broadcom wifi drivers
+        # Build with nix build .#nixosConfigurations.config.system.build.isoImage
+        iso = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+
+          modules = [
+            ({ config, pkgs, ... }: {
+              imports = [
+                "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+                "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+              ];
+
+              nixpkgs.config.allowUnfree = true;
+
+              boot.kernelModules = [ "wl" ];
+
+              boot.extraModulePackages =
+                [ config.boot.kernelPackages.broadcom_sta ];
+
+              # Disable the open-source broadcom modules
+              boot.blacklistedKernelModules = [ "b43" "bcma" ];
+
+              systemd.services.sshd.wantedBy =
+                pkgs.lib.mkForce [ "multi-user.target" ];
+
+              users.users.root.openssh.authorizedKeys.keys = [
+                "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFfcOdH0DX1wM+1UvZ3nBeKuGLyXv+TcHxFyONUaxhhb josh@sparrowhawk"
+              ];
+
+              # Improve the build time
+              isoImage.squashfsCompression = "gzip -Xcompression-level 1";
+            })
           ];
         };
       };
