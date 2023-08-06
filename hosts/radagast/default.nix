@@ -1,11 +1,14 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./hardware-configuration.nix
-  ];
+  imports = [ ./hardware-configuration.nix ];
 
   nixpkgs.config.allowUnfree = true;
+
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    trusted-users = [ "root" "josh" ];
+  };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -36,6 +39,8 @@
   services.openssh.enable = true;
 
   environment.systemPackages = [ pkgs.vim pkgs.git ];
+
+  services.logind.lidSwitch = "ignore";
 
   # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
