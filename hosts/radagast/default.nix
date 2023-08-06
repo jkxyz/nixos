@@ -1,7 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    inputs.nixos-hardware.nixosModules.apple-macbook-pro-14-1
+  ];
 
   nixpkgs.config.allowUnfree = true;
 
@@ -13,10 +16,6 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  # TODO Remove this after adding nixos-hardware
-  boot.initrd.kernelModules =
-    [ "applespi" "spi_pxa2xx_platform" "intel_lpss_pci" "applesmc" ];
 
   boot.kernelModules = [ "wl" ];
 
