@@ -46,6 +46,8 @@ in {
 
   i18n.defaultLocale = "en_US.UTF-8";
 
+  i18n.supportedLocales = [ "all" ];
+
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
 
