@@ -52,7 +52,7 @@
         radagast = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
-          modules = [ ./hosts/radagast ];
+          modules = [ ./nixos/unstable.nix ./hosts/radagast ];
         };
 
         # Custom NixOS installation media with proprietary broadcom wifi drivers

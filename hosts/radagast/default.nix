@@ -28,12 +28,15 @@
 
   time.timeZone = "Europe/Bucharest";
 
+  users.groups.storage = { };
+
   users.users.josh = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "storage" ];
 
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFfcOdH0DX1wM+1UvZ3nBeKuGLyXv+TcHxFyONUaxhhb josh@sparrowhawk"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIExw1zRYbC1F9GdhzIg6D3X/taUeIWWHjJOXUryFqhii"
     ];
   };
 
@@ -48,8 +51,8 @@
     (pkgs.writers.writeBashBin "unlock-storage" ''
       set -e
 
-      cryptsetup open /dev/disk/by-uuid/35fecd0a-e7cb-4465-97f6-5946dc7c95ba crypt-storage-a
-      cryptsetup open /dev/disk/by-uuid/74536e01-cfcf-4c46-aefd-99faa265596f crypt-storage-b
+      cryptsetup open /dev/disk/by-uuid/fab62996-2885-42b8-9510-9d46244fba46 crypt-storage-a
+      cryptsetup open /dev/disk/by-uuid/1384f278-d2e5-426c-85d4-b650c079bfda crypt-storage-b
       mkdir -p /mnt/storage
       mount /dev/mapper/crypt-storage-a /mnt/storage
     '')
@@ -62,6 +65,30 @@
   ];
 
   services.logind.lidSwitch = "ignore";
+
+  services.tailscale = {
+    enable = true;
+    package = pkgs.unstable.tailscale;
+  };
+
+  services.deluge = {
+    enable = true;
+
+    web = {
+      enable = true;
+      openFirewall = true;
+    };
+  };
+
+  users.users.deluge.extraGroups = [ "storage" ];
+
+  services.plex = {
+    enable = true;
+    package = pkgs.unstable.plex;
+    openFirewall = true;
+  };
+
+  users.users.plex.extraGroups = [ "storage" ];
 
   # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
