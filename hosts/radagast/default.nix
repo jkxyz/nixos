@@ -39,7 +39,27 @@
 
   services.openssh.enable = true;
 
-  environment.systemPackages = [ pkgs.vim pkgs.git ];
+  environment.systemPackages = [
+    pkgs.vim
+    pkgs.git
+    pkgs.cryptsetup
+    pkgs.btrfs-progs
+
+    (pkgs.writers.writeBashBin "unlock-storage" ''
+      set -e
+
+      cryptsetup open /dev/disk/by-uuid/35fecd0a-e7cb-4465-97f6-5946dc7c95ba crypt-storage-a
+      cryptsetup open /dev/disk/by-uuid/74536e01-cfcf-4c46-aefd-99faa265596f crypt-storage-b
+      mkdir -p /mnt/storage
+      mount /dev/mapper/crypt-storage-a /mnt/storage
+    '')
+
+    (pkgs.writers.writeBashBin "lock-storage" ''
+      umount /mnt/storage
+      cryptsetup close crypt-storage-a
+      cryptsetup close crypt-storage-b
+    '')
+  ];
 
   services.logind.lidSwitch = "ignore";
 
