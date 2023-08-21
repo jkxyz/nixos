@@ -11,10 +11,6 @@ let
     sha256 = "sha256-Gx7Z99+FDV8x+GJnTbVnHCPmg5YdAAkf9lXyE0lHKLc=";
     message = "Download Beeper AppImage file: https://www.beeper.com/download";
   };
-
-  launcherScript = writeShellScript "beeper-launcher" ''
-    ${appimage-run}/bin/appimage-run ${beeperAppImage}
-  '';
 in stdenv.mkDerivation rec {
   pname = "beeper";
   inherit version;
@@ -26,18 +22,18 @@ in stdenv.mkDerivation rec {
       name = "beeper";
       desktopName = "Beeper";
       icon = "beeper";
-      exec = "beeper-launcher";
+      exec = "${appimage-run}/bin/appimage-run ${beeperAppImage}";
       categories = [ "Utility" ];
       comment = "Beeper: Unified Messenger";
       startupWMClass = "beeper";
     })
   ];
 
-  nativeBuildInputs = [ copyDesktopItems imagemagick ];
+  nativeBuildInputs = [ copyDesktopItems appimage-run imagemagick ];
 
   installPhase = ''
-    install -Dm 755 ${launcherScript} $out/bin/beeper-launcher
-    magick ${./icon.png} -resize 256x256 beeper.png
+    appimage-run -x beeper ${beeperAppImage}
+    magick beeper/resources/icons/icon.png -resize 256x256 beeper.png
     install -Dm644 beeper.png $out/share/icons/hicolor/256x256/apps/beeper.png
     runHook postInstall
   '';
