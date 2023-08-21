@@ -30,6 +30,7 @@
       unstable.simple-scan
       unstable.calibre
       unstable.wl-color-picker
+      unstable.scummvm
     ];
 
     programs.bash = {

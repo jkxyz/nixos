@@ -184,7 +184,8 @@ in {
 
   users.users.josh = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "docker" "scanner" "lp" ];
+    extraGroups =
+      [ "wheel" "networkmanager" "docker" "scanner" "lp" "vboxusers" ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -245,6 +246,11 @@ in {
   services.fwupd.enable = true;
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  virtualisation.virtualbox.host = {
+    enable = true;
+    package = pkgs.unstable.virtualbox;
+  };
 
   # TODO Enable tlp
 
