@@ -6,12 +6,28 @@ This code is in the public domain. Please feel free to take anything you find us
 
 ## Building
 
-The `rebuild` script is provided as an alias for `nixos-rebuild switch --flake . $1 --use-remote-sudo`.
+The `rebuild.sh` script is provided as an alias for `nixos-rebuild switch --flake . $1 --use-remote-sudo`.
 
 To build the system and switch:
 
 ```
-$ ./rebuild switch
+$ ./rebuild.sh switch
+```
+
+## Updating
+
+The `update.sh` script is a helper to update the flake inputs. 
+
+To update just the `nixpkgs-unstable` input:
+
+```
+$ ./update.sh
+```
+
+To update all inputs:
+
+```
+$ ./update.sh all
 ```
 
 ## Optional Packages
