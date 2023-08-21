@@ -1,14 +1,14 @@
 { stdenv, writeShellScript, requireFile, makeDesktopItem, copyDesktopItems
-, appimage-run }:
+, appimage-run, imagemagick }:
 
 let
-  version = "3.64.5";
+  version = "3.70.17";
 
   # nix hash file beeper-x.AppImage
   # nix-store --add-fixed sha256 beeper-x.AppImage
   beeperAppImage = requireFile {
     name = "beeper-${version}.AppImage";
-    sha256 = "sha256-Od8nuKeoQebpStR+33yJKMWf71Q9gvBqH10sGdd1PR4=";
+    sha256 = "sha256-Gx7Z99+FDV8x+GJnTbVnHCPmg5YdAAkf9lXyE0lHKLc=";
     message = "Download Beeper AppImage file: https://www.beeper.com/download";
   };
 
@@ -25,14 +25,20 @@ in stdenv.mkDerivation rec {
     (makeDesktopItem {
       name = "beeper";
       desktopName = "Beeper";
+      icon = "beeper";
       exec = "beeper-launcher";
+      categories = [ "Utility" ];
+      comment = "Beeper: Unified Messenger";
+      startupWMClass = "beeper";
     })
   ];
 
-  nativeBuildInputs = [ copyDesktopItems ];
+  nativeBuildInputs = [ copyDesktopItems imagemagick ];
 
   installPhase = ''
     install -Dm 755 ${launcherScript} $out/bin/beeper-launcher
+    magick ${./icon.png} -resize 256x256 beeper.png
+    install -Dm644 beeper.png $out/share/icons/hicolor/256x256/apps/beeper.png
     runHook postInstall
   '';
 }

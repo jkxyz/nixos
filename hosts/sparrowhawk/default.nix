@@ -195,6 +195,7 @@ in {
     unzip
     zip
     qpwgraph
+    appimage-run
   ];
 
   hardware.bluetooth.enable = true;
