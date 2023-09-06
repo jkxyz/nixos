@@ -32,6 +32,7 @@
       unstable.wl-color-picker
       unstable.scummvm
       unstable.vlc
+      unstable.qownnotes
     ];
 
     programs.bash = {
