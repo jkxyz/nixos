@@ -31,6 +31,7 @@ in {
   networking.hostName = "sparrowhawk";
 
   time.timeZone = "Europe/Bucharest";
+  # time.timeZone = "Europe/Copenhagen";
   # time.timeZone = "Europe/London";
   # time.timeZone = "America/Los_Angeles";
 

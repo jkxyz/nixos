@@ -48,6 +48,8 @@
     pkgs.cryptsetup
     pkgs.btrfs-progs
 
+    # TODO Use a systemd target to prevent starting Plex until storage is mounted
+    # https://daenney.github.io/2021/01/11/systemd-encrypted-filesystems/
     (pkgs.writers.writeBashBin "unlock-storage" ''
       set -e
 
@@ -90,83 +92,66 @@
 
   users.users.plex.extraGroups = [ "storage" ];
 
-  # networking.hostName = "nixos"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  services.photoprism = {
+    enable = false;
+    originalsPath = "/var/lib/private/photoprism/originals";
+    address = "0.0.0.0";
+    settings = {
+      PHOTOPRISM_ADMIN_USER = "admin";
+      PHOTOPRISM_ADMIN_PASSWORD = "admin";
+      PHOTOPRISM_DEFAULT_LOCALE = "en";
+      PHOTOPRISM_DATABASE_DRIVER = "mysql";
+      PHOTOPRISM_DATABASE_NAME = "photoprism";
+      PHOTOPRISM_DATABASE_SERVER = "/run/mysqld/mysqld.sock";
+      PHOTOPRISM_DATABASE_USER = "photoprism";
+      PHOTOPRISM_SITE_URL = "http://photoprism.radagast.joshkingsley.me:2342";
+      PHOTOPRISM_SITE_TITLE = "Josh's PhotoPrism";
+    };
+  };
 
-  # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
+  services.mysql = {
+    enable = true;
+    package = pkgs.mariadb;
+    ensureDatabases = [ "photoprism" ];
+    ensureUsers = [{
+      name = "photoprism";
+      ensurePermissions = { "photoprism.*" = "ALL PRIVILEGES"; };
+    }];
+  };
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkbOptions in tty.
-  # };
-
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-  # Configure keymap in X11
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e,caps:escape";
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.users.alice = {
-  #   isNormalUser = true;
-  #   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-  #   packages = with pkgs; [
-  #     firefox
-  #     tree
-  #   ];
-  # };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  # environment.systemPackages = with pkgs; [
-  #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #   wget
-  # ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
+  # services.nginx = {
   #   enable = true;
-  #   enableSSHSupport = true;
+
+  #   recommendedTlsSettings = true;
+  #   recommendedOptimisation = true;
+  #   recommendedGzipSettings = true;
+  #   recommendedProxySettings = true;
+
+  #   clientMaxBodySize = "500m";
+
+  #   virtualHosts = {
+  #     "photoprism.radagast.joshkingsley.me" = {
+  #       http2 = true;
+
+  #       locations."/" = {
+  #         proxyPass = "http://localhost:2342";
+  #         proxyWebsockets = true;
+  #         extraConfig = ''
+  #           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  #           proxy_set_header Host $host;
+  #           proxy_buffering off;
+  #         '';
+  #       };
+  #     };
+  #   };
   # };
 
-  # List services that you want to enable:
+  # security.acme = {
+  #   acceptTerms = true;
+  #   defaults.email = "josh@joshkingsley.me";
+  # };
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
+  networking.firewall.allowedTCPPorts = [ 2342 ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -175,5 +160,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
-
 }
