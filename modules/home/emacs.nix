@@ -1,10 +1,9 @@
 { pkgs, ... }:
 
 let
-  emacsPgtk = pkgs.unstable.emacs29-pgtk;
   emacsWithPackages =
-    (pkgs.unstable.emacsPackagesFor emacsPgtk).emacsWithPackages
-    (epkgs: with epkgs; [ vterm ]);
+    (pkgs.emacsPackagesFor pkgs.unstable.emacs29-pgtk).emacsWithPackages
+    (epkgs: [ epkgs.vterm ]);
 in {
   home.packages = with pkgs; [
     ripgrep
