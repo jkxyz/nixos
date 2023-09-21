@@ -47,6 +47,7 @@
       userName = "Josh Kingsley";
       userEmail = "josh@joshkingsley.me";
       ignores = [ ".direnv" ];
+      difftastic.enable = true;
     };
 
     programs.direnv.enable = true;
