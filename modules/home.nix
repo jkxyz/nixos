@@ -33,6 +33,7 @@
       unstable.scummvm
       unstable.vlc
       unstable.qownnotes
+      unstable.beekeeper-studio
     ];
 
     programs.bash = {
