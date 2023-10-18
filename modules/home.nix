@@ -25,7 +25,7 @@
       unstable.firefox
       unstable.thunderbird
       xdg-utils
-      unstable.slack
+      # unstable.slack
       unstable.evince
       unstable.simple-scan
       unstable.calibre
@@ -33,7 +33,6 @@
       unstable.scummvm
       unstable.vlc
       unstable.qownnotes
-      unstable.beekeeper-studio
     ];
 
     programs.bash = {

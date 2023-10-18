@@ -8,7 +8,6 @@ in {
   home.packages = with pkgs; [
     ripgrep
     fd
-    emacs-all-the-icons-fonts
     nixfmt
     editorconfig-core-c
     fira-code
