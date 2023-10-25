@@ -26,6 +26,7 @@
         pianoteq = pkgs.callPackage (import ./pkgs/pianoteq) { };
         beeper = pkgs.callPackage (import ./pkgs/beeper) { };
         vcv-rack = pkgs.callPackage (import ./pkgs/vcv-rack) { };
+        ollama = pkgs.callPackage (import ./pkgs/ollama) { };
 
         firefox-nightly-bin = let
           pkgs = import nixpkgs {
