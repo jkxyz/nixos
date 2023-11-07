@@ -33,6 +33,7 @@
       unstable.scummvm
       unstable.vlc
       unstable.qownnotes
+      dnsutils
     ];
 
     programs.bash = {
