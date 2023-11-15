@@ -1,7 +1,8 @@
 {:aliases
  {:jkxyz/cider
   {:extra-deps
-   {cider/cider-nrepl {:mvn/version "0.38.1"}}}
+   {cider/cider-nrepl {:mvn/version "0.38.1"}
+    refactor-nrepl/refactor-nrepl {:mvn/version "3.9.0"}}}
 
   :jkxyz/portal
   {:extra-deps
