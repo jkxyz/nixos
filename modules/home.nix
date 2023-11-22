@@ -25,7 +25,7 @@
       unstable.firefox
       unstable.thunderbird
       xdg-utils
-      # unstable.slack
+      unstable.slack
       unstable.evince
       unstable.simple-scan
       unstable.calibre
