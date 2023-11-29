@@ -254,6 +254,10 @@ in {
     package = pkgs.unstable.virtualbox;
   };
 
+  programs.nix-index.enable = true;
+  programs.nix-index.enableBashIntegration = true;
+  programs.command-not-found.enable = false;
+
   # TODO Enable tlp
 
   # This value determines the NixOS release from which the default

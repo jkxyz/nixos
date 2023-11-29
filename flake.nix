@@ -9,9 +9,12 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nixpkgs-mozilla.url = "github:mozilla/nixpkgs-mozilla";
+
+    nix-index-database.url = "github:Mic92/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ nixpkgs, nixos-hardware, nixpkgs-mozilla, ... }:
+  outputs = inputs@{ nixpkgs, nixos-hardware, nixpkgs-mozilla, nix-index-database, ... }:
     let
       pkgs = import nixpkgs {
         system = "x86_64-linux";
@@ -46,6 +49,7 @@
             ./hosts/sparrowhawk
             ./modules/home-manager.nix
             ./modules/home.nix
+            nix-index-database.nixosModules.nix-index
           ];
         };
 
