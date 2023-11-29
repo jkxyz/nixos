@@ -74,5 +74,5 @@
                            lsp-completion-enable nil))
              #'lsp!))
 
-(require 'journalctl-mode)
-(add-to-list 'journalctl-list-of-options "user-unit")
+;; (require 'journalctl-mode)
+;; (add-to-list 'journalctl-list-of-options "user-unit")

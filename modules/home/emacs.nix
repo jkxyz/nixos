@@ -17,9 +17,9 @@ in {
     pamixer
   ];
 
-  home.sessionPath = [ "$HOME/.emacs.d/bin" ];
+  home.sessionPath = [ "$HOME/.config/emacs/bin" ];
 
-  home.file.".doom.d".source = ./emacs/doom;
+  xdg.configFile."doom".source = ./emacs/doom;
 
   programs.emacs = {
     enable = true;
