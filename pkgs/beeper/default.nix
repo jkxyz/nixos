@@ -2,13 +2,13 @@
 , appimage-run, imagemagick }:
 
 let
-  version = "3.85.17-build-231109zg8yl8v6s";
+  version = "3.87.20-build-2311213pwlsuqeb";
 
   # nix hash file beeper-x.AppImage
   # nix-store --add-fixed sha256 beeper-x.AppImage
   beeperAppImage = requireFile {
     name = "beeper-${version}.AppImage";
-    sha256 = "sha256-sYdfN535Fg3Bm26XKQNyuTItV+1dT3W/2HGH51ncEM0=";
+    sha256 = "sha256-ZyeDqbOxQRiTymie/woaAQ5A868JuJCylPJL6WCSxI8=";
     message = "Download Beeper AppImage file: https://www.beeper.com/download";
   };
 in stdenv.mkDerivation rec {
