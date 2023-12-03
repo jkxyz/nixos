@@ -36,6 +36,8 @@
       dnsutils
     ];
 
+    xdg.enable = true;
+
     programs.bash = {
       enable = true;
       initExtra = ''
