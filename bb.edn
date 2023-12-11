@@ -1,0 +1,4 @@
+{:tasks
+ {spotifyd-login
+  {:doc "Login to Spotify by storing the password in the keyring"
+   :task (shell "secret-tool store --label='spotifyd' application rust-keyring service spotifyd username josh@joshkingsley.me")}}}

@@ -22,7 +22,7 @@
       };
     in {
       devShell.x86_64-linux =
-        pkgs.mkShell { nativeBuildInputs = [ pkgs.nvd pkgs.babashka ]; };
+        pkgs.mkShell { nativeBuildInputs = [ pkgs.nvd pkgs.babashka pkgs.libsecret ]; };
 
       packages.x86_64-linux = {
         # These packages can be installed into a profile with `nix profile install .#PKG`
