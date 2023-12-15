@@ -24,8 +24,15 @@ in {
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
+  boot.bootspec.enable = true;
+
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/etc/secureboot";
+  };
+
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "sparrowhawk";

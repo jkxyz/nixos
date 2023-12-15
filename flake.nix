@@ -12,17 +12,22 @@
 
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
+    lanzaboote.url = "github:nix-community/lanzaboote";
   };
 
-  outputs = inputs@{ nixpkgs, nixos-hardware, nixpkgs-mozilla, nix-index-database, ... }:
+  outputs = inputs@{ nixpkgs, nixos-hardware, nixpkgs-mozilla
+    , nix-index-database, lanzaboote, ... }:
     let
       pkgs = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfree = true;
       };
     in {
-      devShell.x86_64-linux =
-        pkgs.mkShell { nativeBuildInputs = [ pkgs.nvd pkgs.babashka pkgs.libsecret ]; };
+      devShell.x86_64-linux = pkgs.mkShell {
+        nativeBuildInputs =
+          [ pkgs.nvd pkgs.babashka pkgs.libsecret pkgs.sbctl ];
+      };
 
       packages.x86_64-linux = {
         # These packages can be installed into a profile with `nix profile install .#PKG`
@@ -50,6 +55,7 @@
             ./modules/home-manager.nix
             ./modules/home.nix
             nix-index-database.nixosModules.nix-index
+            lanzaboote.nixosModules.lanzaboote
           ];
         };
 
