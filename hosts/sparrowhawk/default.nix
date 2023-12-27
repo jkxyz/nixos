@@ -33,6 +33,8 @@ in {
     pkiBundle = "/etc/secureboot";
   };
 
+  boot.initrd.systemd.enable = true;
+
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "sparrowhawk";
@@ -131,6 +133,7 @@ in {
       gnome.adwaita-icon-theme
       unstable.waybar
       unstable.font-awesome
+      tpm2-tss
     ];
 
     extraSessionCommands = ''
