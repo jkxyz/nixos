@@ -23,9 +23,9 @@
       unstable.htop
       unstable.keepassxc
       unstable.firefox
+      unstable.google-chrome
       unstable.thunderbird
       xdg-utils
-      unstable.slack
       unstable.evince
       unstable.simple-scan
       unstable.calibre
