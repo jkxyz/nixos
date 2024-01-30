@@ -35,6 +35,7 @@
         beeper = pkgs.callPackage (import ./pkgs/beeper) { };
         vcv-rack = pkgs.callPackage (import ./pkgs/vcv-rack) { };
         ollama = pkgs.callPackage (import ./pkgs/ollama) { };
+        youtube-dl = pkgs.callPackage (import ./pkgs/youtube-dl) { };
 
         firefox-nightly-bin = let
           pkgs = import nixpkgs {
