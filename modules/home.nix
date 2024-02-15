@@ -34,6 +34,8 @@
       unstable.vlc
       unstable.qownnotes
       dnsutils
+      unstable.slack
+      unstable.libreoffice-qt
     ];
 
     xdg.enable = true;
