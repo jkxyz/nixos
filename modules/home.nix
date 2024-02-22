@@ -22,7 +22,6 @@
       unstable.nextcloud-client
       unstable.htop
       unstable.keepassxc
-      unstable.firefox
       unstable.google-chrome
       unstable.thunderbird
       xdg-utils
@@ -37,6 +36,18 @@
       unstable.slack
       unstable.libreoffice-qt
     ];
+
+    programs.firefox = {
+      enable = true;
+      package = pkgs.unstable.firefox;
+      policies = {
+        SecurityDevices = {
+          Add = {
+            "SafeNet" = "${pkgs.pcsc-safenet}/lib/libeToken.so";
+          };
+        };
+      };
+    };
 
     xdg.enable = true;
 

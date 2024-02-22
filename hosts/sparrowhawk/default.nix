@@ -268,6 +268,14 @@ in {
   programs.nix-index.enableBashIntegration = true;
   programs.command-not-found.enable = false;
 
+  services.pcscd = {
+    enable = true;
+    plugins = [ pkgs.pcsc-safenet ];
+  };
+
+  # Required for SafeNet
+  nixpkgs.config.permittedInsecurePackages = [ "openssl-1.1.1w" ];
+
   # TODO Enable tlp
 
   # This value determines the NixOS release from which the default
