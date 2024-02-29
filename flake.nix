@@ -14,10 +14,12 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     lanzaboote.url = "github:nix-community/lanzaboote";
+
+    musnix.url = "github:musnix/musnix";
   };
 
   outputs = inputs@{ nixpkgs, nixos-hardware, nixpkgs-mozilla
-    , nix-index-database, lanzaboote, ... }:
+    , nix-index-database, lanzaboote, musnix, ... }:
     let
       pkgs = import nixpkgs {
         system = "x86_64-linux";
@@ -57,6 +59,7 @@
             ./modules/home.nix
             nix-index-database.nixosModules.nix-index
             lanzaboote.nixosModules.lanzaboote
+            musnix.nixosModules.musnix
           ];
         };
 

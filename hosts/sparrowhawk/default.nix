@@ -22,6 +22,17 @@ in {
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback.out ];
+
+  boot.kernelModules = [
+    "v4l2loopback" # Virtual camera
+    "snd-aloop" # Virtual microphone
+  ];
+
+  boot.extraModprobeConfig = ''
+    options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
+  '';
+
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   boot.bootspec.enable = true;
@@ -196,7 +207,7 @@ in {
   users.users.josh = {
     isNormalUser = true;
     extraGroups =
-      [ "wheel" "networkmanager" "docker" "scanner" "lp" "vboxusers" ];
+      [ "wheel" "networkmanager" "docker" "scanner" "lp" "vboxusers" "audio" ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -272,6 +283,8 @@ in {
     enable = true;
     plugins = [ pkgs.pcsc-safenet ];
   };
+
+  musnix.enable = true;
 
   # Required for SafeNet
   nixpkgs.config.permittedInsecurePackages = [ "openssl-1.1.1w" ];

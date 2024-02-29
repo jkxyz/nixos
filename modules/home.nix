@@ -35,6 +35,8 @@
       dnsutils
       unstable.slack
       unstable.libreoffice-qt
+      unstable.droidcam
+      unstable.bitwig-studio
     ];
 
     programs.firefox = {
