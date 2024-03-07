@@ -218,6 +218,7 @@ in {
     zip
     qpwgraph
     appimage-run
+    pciutils
   ];
 
   hardware.bluetooth.enable = true;
