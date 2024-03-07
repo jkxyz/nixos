@@ -39,18 +39,6 @@
       unstable.bitwig-studio
     ];
 
-    programs.firefox = {
-      enable = true;
-      package = pkgs.unstable.firefox;
-      policies = {
-        SecurityDevices = {
-          Add = {
-            "SafeNet" = "${pkgs.pcsc-safenet}/lib/libeToken.so";
-          };
-        };
-      };
-    };
-
     xdg.enable = true;
 
     programs.bash = {

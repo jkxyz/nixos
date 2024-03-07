@@ -285,6 +285,15 @@ in {
     plugins = [ pkgs.pcsc-safenet ];
   };
 
+  programs.firefox = {
+    enable = true;
+    policies = {
+      SecurityDevices = {
+        Add = { "SafeNet" = "${pkgs.pcsc-safenet}/lib/libeToken.so"; };
+      };
+    };
+  };
+
   musnix.enable = true;
 
   # Required for SafeNet
