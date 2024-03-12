@@ -95,6 +95,8 @@ in {
   services.xserver.desktopManager.plasma5.enable = true;
   services.xserver.displayManager.defaultSession = "plasmawayland";
 
+  sound.enable = false;
+
   security.rtkit.enable = true;
 
   services.pipewire = {
@@ -103,6 +105,7 @@ in {
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
+    # TODO Add low-latency options
   };
 
   # xdg.portal = {
