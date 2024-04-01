@@ -276,7 +276,6 @@ in {
 
   virtualisation.virtualbox.host = {
     enable = true;
-    package = pkgs.unstable.virtualbox;
   };
 
   programs.nix-index.enable = true;
