@@ -20,7 +20,10 @@ in {
     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # TODO Revert to latest kernel - v4l2loopback was failing on 6.8
+  # TODO Switch to nixos-unstable
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_6_7;
 
   boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback.out ];
 
