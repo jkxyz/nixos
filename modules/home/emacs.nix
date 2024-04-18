@@ -15,6 +15,8 @@ in {
     gcc
     binutils
     pamixer
+    python3
+    poetry
   ];
 
   home.sessionPath = [ "$HOME/.config/emacs/bin" ];

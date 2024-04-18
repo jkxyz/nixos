@@ -78,24 +78,5 @@
     # };
 
     # services.kdeconnect.enable = true;
-
-    services.spotifyd = {
-      enable = true;
-
-      package = (pkgs.spotifyd.override {
-        withKeyring = true;
-        withMpris = true;
-      });
-
-      settings = {
-        global = {
-          username = "josh@joshkingsley.me";
-          device_name = "sparrowhawk";
-          use_keyring = true;
-          use_mpris = true;
-          device_type = "computer";
-        };
-      };
-    };
   };
 }
