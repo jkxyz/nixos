@@ -124,7 +124,10 @@
         group = "prosody";
         dnsProvider = "namecheap";
         environmentFile = config.age.secrets.radagast-acme-env.path;
+
+        # Disable checking for DNS propagation, because it doesn't seem to work
         extraLegoFlags = [ "--dns.disable-cp" ];
+
         extraDomainNames = [
           "conference.radagast.joshkingsley.me"
           "upload.radagast.joshkingsley.me"

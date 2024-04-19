@@ -37,6 +37,7 @@
       unstable.libreoffice-qt
       unstable.droidcam
       unstable.bitwig-studio
+      unstable.dino
     ];
 
     xdg.enable = true;
