@@ -92,66 +92,46 @@
 
   users.users.plex.extraGroups = [ "storage" ];
 
-  services.photoprism = {
-    enable = false;
-    originalsPath = "/var/lib/private/photoprism/originals";
-    address = "0.0.0.0";
-    settings = {
-      PHOTOPRISM_ADMIN_USER = "admin";
-      PHOTOPRISM_ADMIN_PASSWORD = "admin";
-      PHOTOPRISM_DEFAULT_LOCALE = "en";
-      PHOTOPRISM_DATABASE_DRIVER = "mysql";
-      PHOTOPRISM_DATABASE_NAME = "photoprism";
-      PHOTOPRISM_DATABASE_SERVER = "/run/mysqld/mysqld.sock";
-      PHOTOPRISM_DATABASE_USER = "photoprism";
-      PHOTOPRISM_SITE_URL = "http://photoprism.radagast.joshkingsley.me:2342";
-      PHOTOPRISM_SITE_TITLE = "Josh's PhotoPrism";
+  age.secrets.radagast-acme-env.file =
+    "${inputs.self}/secrets/radagast-acme-env.age";
+
+  services.prosody = {
+    enable = true;
+
+    admins = [ "josh@radagast.joshkingsley.me" ];
+
+    ssl.cert = "/var/lib/acme/radagast.joshkingsley.me/fullchain.pem";
+    ssl.key = "/var/lib/acme/radagast.joshkingsley.me/key.pem";
+
+    virtualHosts."radagast.joshkingsley.me" = {
+      enabled = true;
+      domain = "radagast.joshkingsley.me";
+      ssl.cert = "/var/lib/acme/radagast.joshkingsley.me/fullchain.pem";
+      ssl.key = "/var/lib/acme/radagast.joshkingsley.me/key.pem";
+    };
+
+    muc = [{ domain = "conference.radagast.joshkingsley.me"; }];
+
+    uploadHttp = { domain = "upload.radagast.joshkingsley.me"; };
+  };
+
+  security.acme = {
+    defaults.email = "josh@joshkingsley.me";
+    acceptTerms = true;
+
+    certs = {
+      "radagast.joshkingsley.me" = {
+        group = "prosody";
+        dnsProvider = "namecheap";
+        environmentFile = config.age.secrets.radagast-acme-env.path;
+        extraLegoFlags = [ "--dns.disable-cp" ];
+        extraDomainNames = [
+          "conference.radagast.joshkingsley.me"
+          "upload.radagast.joshkingsley.me"
+        ];
+      };
     };
   };
-
-  services.mysql = {
-    enable = true;
-    package = pkgs.mariadb;
-    ensureDatabases = [ "photoprism" ];
-    ensureUsers = [{
-      name = "photoprism";
-      ensurePermissions = { "photoprism.*" = "ALL PRIVILEGES"; };
-    }];
-  };
-
-  # services.nginx = {
-  #   enable = true;
-
-  #   recommendedTlsSettings = true;
-  #   recommendedOptimisation = true;
-  #   recommendedGzipSettings = true;
-  #   recommendedProxySettings = true;
-
-  #   clientMaxBodySize = "500m";
-
-  #   virtualHosts = {
-  #     "photoprism.radagast.joshkingsley.me" = {
-  #       http2 = true;
-
-  #       locations."/" = {
-  #         proxyPass = "http://localhost:2342";
-  #         proxyWebsockets = true;
-  #         extraConfig = ''
-  #           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-  #           proxy_set_header Host $host;
-  #           proxy_buffering off;
-  #         '';
-  #       };
-  #     };
-  #   };
-  # };
-
-  # security.acme = {
-  #   acceptTerms = true;
-  #   defaults.email = "josh@joshkingsley.me";
-  # };
-
-  networking.firewall.allowedTCPPorts = [ 2342 ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

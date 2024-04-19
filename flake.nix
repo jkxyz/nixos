@@ -16,10 +16,14 @@
     lanzaboote.url = "github:nix-community/lanzaboote";
 
     musnix.url = "github:musnix/musnix";
+
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
+    agenix.inputs.darwin.follows = "";
   };
 
   outputs = inputs@{ nixpkgs, nixos-hardware, nixpkgs-mozilla
-    , nix-index-database, lanzaboote, musnix, ... }:
+    , nix-index-database, lanzaboote, musnix, agenix, ... }:
     let
       pkgs = import nixpkgs {
         system = "x86_64-linux";
@@ -27,8 +31,13 @@
       };
     in {
       devShell.x86_64-linux = pkgs.mkShell {
-        nativeBuildInputs =
-          [ pkgs.nvd pkgs.babashka pkgs.libsecret pkgs.sbctl ];
+        nativeBuildInputs = [
+          pkgs.nvd
+          pkgs.babashka
+          pkgs.libsecret
+          pkgs.sbctl
+          agenix.packages.x86_64-linux.default
+        ];
       };
 
       packages.x86_64-linux = {
@@ -67,7 +76,11 @@
         radagast = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
-          modules = [ ./nixos/unstable.nix ./hosts/radagast ];
+          modules = [
+            agenix.nixosModules.default
+            ./nixos/unstable.nix
+            ./hosts/radagast
+          ];
         };
 
         # Custom NixOS installation media with proprietary broadcom wifi drivers
