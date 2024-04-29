@@ -17,6 +17,9 @@ in {
     pamixer
     python3
     poetry
+    nodePackages.pyright
+    cmake
+    gnumake
   ];
 
   home.sessionPath = [ "$HOME/.config/emacs/bin" ];
