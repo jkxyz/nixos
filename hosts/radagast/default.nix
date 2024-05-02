@@ -136,6 +136,45 @@
     };
   };
 
+  age.secrets.radagast-fren-env.file = "${inputs.self}/secrets/radagast-fren-env.age";
+
+  users.users.fren = {
+    isNormalUser = true;
+    home = "/var/lib/fren";
+    group = "fren";
+  };
+
+  users.groups.fren = {};
+
+  systemd.services.fren = {
+    description = "Fren";
+    after = [ "prosody.service" ];
+    wants = [ "prosody.service" ];
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig = {
+      User = "fren";
+      Group = "fren";
+      CacheDirectory = "fren";
+      StateDirectory = "fren";
+      ExecStart = "${inputs.fren.packages.x86_64-linux.fren}/bin/fren";
+      EnvironmentFile = config.age.secrets.radagast-fren-env.path;
+
+      MemoryDenyWriteExecute = true;
+      PrivateDevices = true;
+      PrivateMounts = true;
+      PrivateTmp = true;
+      ProtectControlGroups = true;
+      ProtectHome = true;
+      ProtectHostname = true;
+      ProtectKernelModules = true;
+      ProtectKernelTunables = true;
+      RestrictNamespaces = true;
+      RestrictRealtime = true;
+      RestrictSUIDSGID = true;
+    };
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It's perfectly fine and recommended to leave

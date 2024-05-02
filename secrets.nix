@@ -8,4 +8,7 @@ let
   ];
 
   all-keys = users ++ systems;
-in { "secrets/radagast-acme-env.age".publicKeys = all-keys; }
+in {
+  "secrets/radagast-acme-env.age".publicKeys = all-keys;
+  "secrets/radagast-fren-env.age".publicKeys = all-keys;
+}

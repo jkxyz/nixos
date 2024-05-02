@@ -20,6 +20,8 @@
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
     agenix.inputs.darwin.follows = "";
+
+    fren.url = "git+ssh://git@github.com/jkxyz/fren";
   };
 
   outputs = inputs@{ nixpkgs, nixos-hardware, nixpkgs-mozilla
@@ -54,6 +56,8 @@
             overlays = [ nixpkgs-mozilla.overlays.firefox ];
           };
         in pkgs.latest.firefox-nightly-bin;
+
+        fren = inputs.fren.packages.x86_64-linux.fren;
       };
 
       nixosConfigurations = {
