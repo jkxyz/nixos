@@ -38,6 +38,9 @@
       unstable.droidcam
       unstable.bitwig-studio
       unstable.dino
+      unstable.konversation
+      unstable.kdePackages.filelight
+      unstable.partition-manager
     ];
 
     xdg.enable = true;
