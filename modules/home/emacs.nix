@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
   emacsWithPackages =
@@ -15,11 +15,15 @@ in {
     gcc
     binutils
     pamixer
-    python3
-    poetry
-    nodePackages.pyright
     cmake
     gnumake
+
+    # Python
+    python3
+    poetry
+    black
+    isort
+    nodePackages.pyright
   ];
 
   home.sessionPath = [ "$HOME/.config/emacs/bin" ];
@@ -38,4 +42,6 @@ in {
     defaultEditor = true;
     startWithUserSession = "graphical";
   };
+
+  systemd.user.services.emacs.Service.Restart = lib.mkForce "always";
 }
