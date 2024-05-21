@@ -17,6 +17,7 @@ in {
     pamixer
     cmake
     gnumake
+    nodePackages.prettier
 
     # Python
     python3
