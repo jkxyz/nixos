@@ -20,21 +20,7 @@ in {
     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
   ];
 
-  # TODO Revert to latest kernel - v4l2loopback was failing on 6.8
-  # TODO Switch to nixos-unstable
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages_6_7;
-
-  boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback.out ];
-
-  boot.kernelModules = [
-    "v4l2loopback" # Virtual camera
-    "snd-aloop" # Virtual microphone
-  ];
-
-  boot.extraModprobeConfig = ''
-    options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
-  '';
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
@@ -256,19 +242,6 @@ in {
 
   programs.kdeconnect.enable = true;
 
-  programs._1password = {
-    enable = true;
-    package = pkgs.unstable._1password;
-  };
-
-  programs._1password-gui = {
-    enable = true;
-    package = pkgs.unstable._1password-gui;
-    polkitPolicyOwners = [ "josh" ];
-  };
-
-  programs.thunar.enable = true;
-
   services.flatpak.enable = true;
 
   programs.ssh.startAgent = true;
@@ -277,9 +250,8 @@ in {
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  virtualisation.virtualbox.host = {
-    enable = true;
-  };
+  # TODO Enable this again - was failing on kernel 6.9
+  virtualisation.virtualbox.host.enable = false;
 
   programs.nix-index.enable = true;
   programs.nix-index.enableBashIntegration = true;

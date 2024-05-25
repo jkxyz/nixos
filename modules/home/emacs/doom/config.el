@@ -26,7 +26,7 @@
   "Run `magit-status' after switching to a new project."
   (if (not (magit-toplevel))
       (dired ".")
-      (magit-status-setup-buffer)))
+    (magit-status-setup-buffer)))
 
 (setq +workspaces-switch-project-function #'jk/switch-project-action)
 
@@ -76,3 +76,8 @@
 
 ;; (require 'journalctl-mode)
 ;; (add-to-list 'journalctl-list-of-options "user-unit")
+
+(use-package! lsp-tailwindcss
+  :init
+  (setq lsp-tailwindcss-add-on-mode t)
+  (add-hook 'before-save-hook 'lsp-tailwindcss-rustywind-before-save))

@@ -18,6 +18,8 @@ in {
     cmake
     gnumake
     nodePackages.prettier
+    tailwindcss-language-server
+    rustywind
 
     # Python
     python3
