@@ -13,11 +13,15 @@ in {
   jkxyz.home.users.josh.enable = true;
   jkxyz.nix.persistDerivations = true;
 
-  nix.settings.substituters =
-    [ "https://cache.nixos.org" "https://nix-community.cachix.org" ];
+  nix.settings.substituters = [
+    "https://cache.nixos.org"
+    "https://nix-community.cachix.org"
+    "https://devenv.cachix.org"
+  ];
 
   nix.settings.trusted-public-keys = [
     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
