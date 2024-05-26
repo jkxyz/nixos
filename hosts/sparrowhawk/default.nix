@@ -248,7 +248,10 @@ in {
 
   services.flatpak.enable = true;
 
-  programs.ssh.startAgent = true;
+  programs.ssh = {
+    startAgent = true;
+    agentTimeout = "1h";
+  };
 
   services.fwupd.enable = true;
 

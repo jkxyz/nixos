@@ -21,7 +21,8 @@
     agenix.inputs.nixpkgs.follows = "nixpkgs";
     agenix.inputs.darwin.follows = "";
 
-    fren.url = "git+ssh://git@github.com/jkxyz/fren";
+    fren.url =
+      "git+ssh://git@github.com/jkxyz/fren?rev=64374504a426fa9a8ae0c75b465b6fe57d67dbfe";
   };
 
   outputs = inputs@{ nixpkgs, nixos-hardware, nixpkgs-mozilla

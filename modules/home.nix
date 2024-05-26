@@ -83,5 +83,20 @@
     # };
 
     # services.kdeconnect.enable = true;
+
+    programs.ssh = {
+      enable = true;
+
+      extraConfig = ''
+        AddKeysToAgent yes
+      '';
+
+      matchBlocks = {
+        "radagast" = {
+          host = "radagast radagast.joshkingsley.me";
+          forwardAgent = true;
+        };
+      };
+    };
   };
 }

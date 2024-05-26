@@ -42,6 +42,8 @@
 
   services.openssh.enable = true;
 
+  security.pam.enableSSHAgentAuth = true;
+
   environment.systemPackages = [
     pkgs.vim
     pkgs.git
@@ -136,7 +138,8 @@
     };
   };
 
-  age.secrets.radagast-fren-env.file = "${inputs.self}/secrets/radagast-fren-env.age";
+  age.secrets.radagast-fren-env.file =
+    "${inputs.self}/secrets/radagast-fren-env.age";
 
   users.users.fren = {
     isNormalUser = true;
@@ -144,7 +147,7 @@
     group = "fren";
   };
 
-  users.groups.fren = {};
+  users.groups.fren = { };
 
   systemd.services.fren = {
     description = "Fren";
