@@ -42,6 +42,7 @@
       unstable.kdePackages.filelight
       unstable.partition-manager
       unstable.devenv
+      kdialog
     ];
 
     xdg.enable = true;

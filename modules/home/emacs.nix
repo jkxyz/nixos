@@ -27,6 +27,7 @@ in {
     black
     isort
     nodePackages.pyright
+    python311Packages.pyflakes
   ];
 
   home.sessionPath = [ "$HOME/.config/emacs/bin" ];
