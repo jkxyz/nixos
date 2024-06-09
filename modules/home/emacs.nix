@@ -8,7 +8,7 @@ in {
   home.packages = with pkgs; [
     ripgrep
     fd
-    nixfmt
+    nixfmt-rfc-style
     editorconfig-core-c
     fira-code
     pandoc

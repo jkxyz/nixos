@@ -11,7 +11,7 @@
     };
 
     jkxyz.home.users.josh.extraGroups = lib.mkOption {
-      type = lib.types.listOf lib.types.string;
+      type = lib.types.listOf lib.types.str;
       default = [ ];
     };
   };

@@ -84,9 +84,10 @@ in {
   # };
 
   services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-  services.xserver.displayManager.defaultSession = "plasmawayland";
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  services.desktopManager.plasma6.enable = true;
+  services.displayManager.defaultSession = "plasma";
 
   sound.enable = false;
 
@@ -98,107 +99,7 @@ in {
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
-    # TODO Add low-latency options
   };
-
-  # xdg.portal = {
-  #   enable = true;
-  #   wlr.enable = true;
-  #   extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  # };
-
-  # Gnome VirtualFS - Needed for nautilus to work properly
-  services.gvfs.enable = true;
-
-  programs.dconf.enable = true;
-
-  # Configure keymap in X11
-  # services.xserver.layout = "us";
-
-  services.upower.enable = true;
-
-  programs.sway = {
-    enable = false;
-    wrapperFeatures.gtk = true;
-    extraPackages = with pkgs; [
-      alacritty
-      rofi-wayland
-      mako
-      swaylock
-      swayidle
-      wl-clipboard
-      brightnessctl
-      wob
-      pamixer
-      acpi
-      sysstat
-      swaybg
-      jc
-      (writeBabashka "/bin/jk-sway-status" ./jk_sway_status.clj)
-      swaywsr
-      kanshi
-      gnome.adwaita-icon-theme
-      unstable.waybar
-      unstable.font-awesome
-      tpm2-tss
-    ];
-
-    extraSessionCommands = ''
-      export MOZ_ENABLE_WAYLAND=1
-    '';
-  };
-
-  services.greetd = let
-    greetdStyle = pkgs.writeText "greetd.css" ''
-      window {
-        background-image: url("file://${
-          ../../home/sway/backgrounds/Galaxy.jpg
-        }");
-        background-size: cover;
-        background-position: center;
-      }
-
-      box#body {
-        background-color: rgba(50, 50, 50, 0.5);
-        border-radius: 10px;
-        padding: 50px;
-        color: #fafafa;
-      }
-
-      #clock {
-        color: rgba(250, 250, 250, 0.8);
-      }
-    '';
-    swayConfig = pkgs.writeText "greetd-sway-config" ''
-      # Fix from here: https://github.com/swaywm/sway/wiki#gtk-applications-take-20-seconds-to-start
-      exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-
-      exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet --layer-shell --command sway --style ${greetdStyle}; swaymsg exit"
-    '';
-  in {
-    enable = false;
-    settings = {
-      default_session = {
-        command = "${pkgs.sway}/bin/sway --config ${swayConfig}";
-      };
-    };
-  };
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = false;
-  # hardware.pulseaudio = {
-  #   enable = true;
-  #   # extraModules = [ pkgs.pulseaudio-modules-bt ];
-  #   package = pkgs.pulseaudioFull;
-  # };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
-  services.xserver.libinput.touchpad.naturalScrolling = true;
 
   users.users.josh = {
     isNormalUser = true;
@@ -226,8 +127,6 @@ in {
   virtualisation.docker.enable = true;
   virtualisation.docker.enableOnBoot = false;
 
-  services.gnome.gnome-keyring.enable = true;
-
   services.tailscale = {
     enable = true;
     package = pkgs.unstable.tailscale;
@@ -239,7 +138,7 @@ in {
   services.printing.drivers = [ pkgs.hplip ];
 
   services.avahi.enable = true;
-  services.avahi.nssmdns = true;
+  services.avahi.nssmdns4 = true;
 
   hardware.sane.enable = true;
   hardware.sane.extraBackends = [ pkgs.hplipWithPlugin ];

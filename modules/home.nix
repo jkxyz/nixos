@@ -43,6 +43,7 @@
       unstable.partition-manager
       unstable.devenv
       kdialog
+      vscodium
     ];
 
     xdg.enable = true;
