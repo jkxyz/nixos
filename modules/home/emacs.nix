@@ -1,10 +1,11 @@
 { pkgs, lib, ... }:
 
 let
-  emacsWithPackages =
-    (pkgs.emacsPackagesFor pkgs.unstable.emacs29-pgtk).emacsWithPackages
-    (epkgs: [ epkgs.vterm ]);
-in {
+  emacsWithPackages = (pkgs.emacsPackagesFor pkgs.unstable.emacs29-pgtk).emacsWithPackages (epkgs: [
+    epkgs.vterm
+  ]);
+in
+{
   home.packages = with pkgs; [
     ripgrep
     fd
@@ -26,7 +27,7 @@ in {
     poetry
     black
     isort
-    nodePackages.pyright
+    pyright
     python311Packages.pyflakes
   ];
 

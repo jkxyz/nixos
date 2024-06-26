@@ -1,10 +1,15 @@
-{ config, pkgs, lib, inputs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
 
 let
-  writeBabashka =
-    pkgs.writers.makeScriptWriter { interpreter = "${pkgs.babashka}/bin/bb"; };
-
-in {
+  writeBabashka = pkgs.writers.makeScriptWriter { interpreter = "${pkgs.babashka}/bin/bb"; };
+in
+{
   imports = [
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel
     ./hardware-configuration.nix
@@ -103,8 +108,15 @@ in {
 
   users.users.josh = {
     isNormalUser = true;
-    extraGroups =
-      [ "wheel" "networkmanager" "docker" "scanner" "lp" "vboxusers" "audio" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "docker"
+      "scanner"
+      "lp"
+      "vboxusers"
+      "audio"
+    ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -121,7 +133,9 @@ in {
   hardware.bluetooth.enable = true;
 
   hardware.bluetooth.settings = {
-    General = { Enable = "Source,Sink,Media,Socket"; };
+    General = {
+      Enable = "Source,Sink,Media,Socket";
+    };
   };
 
   virtualisation.docker.enable = true;
@@ -156,8 +170,7 @@ in {
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  # TODO Enable this again - was failing on kernel 6.9
-  virtualisation.virtualbox.host.enable = false;
+  virtualisation.virtualbox.host.enable = true;
 
   programs.nix-index.enable = true;
   programs.nix-index.enableBashIntegration = true;
@@ -172,7 +185,9 @@ in {
     enable = true;
     policies = {
       SecurityDevices = {
-        Add = { "SafeNet" = "${pkgs.pcsc-safenet}/lib/libeToken.so"; };
+        Add = {
+          "SafeNet" = "${pkgs.pcsc-safenet}/lib/libeToken.so";
+        };
       };
     };
   };

@@ -1,11 +1,11 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
-    home-manager.url = "github:nix-community/home-manager/release-24.05";
+    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nixpkgs-mozilla.url = "github:mozilla/nixpkgs-mozilla";
@@ -21,18 +21,27 @@
     agenix.inputs.nixpkgs.follows = "nixpkgs";
     agenix.inputs.darwin.follows = "";
 
-    fren.url =
-      "git+ssh://git@github.com/jkxyz/fren?rev=64374504a426fa9a8ae0c75b465b6fe57d67dbfe";
+    fren.url = "git+ssh://git@github.com/jkxyz/fren?rev=64374504a426fa9a8ae0c75b465b6fe57d67dbfe";
   };
 
-  outputs = inputs@{ nixpkgs, nixos-hardware, nixpkgs-mozilla
-    , nix-index-database, lanzaboote, musnix, agenix, ... }:
+  outputs =
+    inputs@{
+      nixpkgs,
+      nixos-hardware,
+      nixpkgs-mozilla,
+      nix-index-database,
+      lanzaboote,
+      musnix,
+      agenix,
+      ...
+    }:
     let
       pkgs = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfree = true;
       };
-    in {
+    in
+    {
       devShell.x86_64-linux = pkgs.mkShell {
         nativeBuildInputs = [
           pkgs.nvd
@@ -51,12 +60,14 @@
         ollama = pkgs.callPackage (import ./pkgs/ollama) { };
         youtube-dl = pkgs.callPackage (import ./pkgs/youtube-dl) { };
 
-        firefox-nightly-bin = let
-          pkgs = import nixpkgs {
-            system = "x86_64-linux";
-            overlays = [ nixpkgs-mozilla.overlays.firefox ];
-          };
-        in pkgs.latest.firefox-nightly-bin;
+        firefox-nightly-bin =
+          let
+            pkgs = import nixpkgs {
+              system = "x86_64-linux";
+              overlays = [ nixpkgs-mozilla.overlays.firefox ];
+            };
+          in
+          pkgs.latest.firefox-nightly-bin;
 
         fren = inputs.fren.packages.x86_64-linux.fren;
       };
@@ -65,7 +76,9 @@
         # ThinkPad E14 laptop
         sparrowhawk = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
+          specialArgs = {
+            inherit inputs;
+          };
           modules = [
             ./nixos
             ./hosts/sparrowhawk
@@ -80,7 +93,9 @@
         # MacBook Pro 2017 home server
         radagast = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
+          specialArgs = {
+            inherit inputs;
+          };
           modules = [
             agenix.nixosModules.default
             ./nixos/unstable.nix
@@ -94,32 +109,36 @@
           system = "x86_64-linux";
 
           modules = [
-            ({ config, pkgs, ... }: {
-              imports = [
-                "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-                "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
-              ];
+            (
+              { config, pkgs, ... }:
+              {
+                imports = [
+                  "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+                  "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+                ];
 
-              nixpkgs.config.allowUnfree = true;
+                nixpkgs.config.allowUnfree = true;
 
-              boot.kernelModules = [ "wl" ];
+                boot.kernelModules = [ "wl" ];
 
-              boot.extraModulePackages =
-                [ config.boot.kernelPackages.broadcom_sta ];
+                boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
 
-              # Disable the open-source broadcom modules
-              boot.blacklistedKernelModules = [ "b43" "bcma" ];
+                # Disable the open-source broadcom modules
+                boot.blacklistedKernelModules = [
+                  "b43"
+                  "bcma"
+                ];
 
-              systemd.services.sshd.wantedBy =
-                pkgs.lib.mkForce [ "multi-user.target" ];
+                systemd.services.sshd.wantedBy = pkgs.lib.mkForce [ "multi-user.target" ];
 
-              users.users.root.openssh.authorizedKeys.keys = [
-                "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFfcOdH0DX1wM+1UvZ3nBeKuGLyXv+TcHxFyONUaxhhb josh@sparrowhawk"
-              ];
+                users.users.root.openssh.authorizedKeys.keys = [
+                  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFfcOdH0DX1wM+1UvZ3nBeKuGLyXv+TcHxFyONUaxhhb josh@sparrowhawk"
+                ];
 
-              # Improve the build time
-              isoImage.squashfsCompression = "gzip -Xcompression-level 1";
-            })
+                # Improve the build time
+                isoImage.squashfsCompression = "gzip -Xcompression-level 1";
+              }
+            )
           ];
         };
       };
