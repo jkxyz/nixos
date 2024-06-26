@@ -31,7 +31,6 @@
         unstable.evince
         unstable.simple-scan
         unstable.calibre
-        unstable.wl-color-picker
         unstable.scummvm
         unstable.vlc
         unstable.qownnotes
@@ -45,8 +44,7 @@
         unstable.kdePackages.filelight
         unstable.partition-manager
         unstable.devenv
-        kdialog
-        vscodium
+        kdePackages.kdialog
       ];
 
       xdg.enable = true;
